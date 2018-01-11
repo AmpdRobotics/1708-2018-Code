@@ -1,1 +1,19 @@
-/bin/
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.jar
+local.properties
+.settings/
+.loadpath
+.recommenders
+build/
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
