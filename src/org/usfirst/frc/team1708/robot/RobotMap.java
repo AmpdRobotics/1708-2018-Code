@@ -10,12 +10,20 @@ import edu.wpi.first.wpilibj.VictorSP;
  * floating around.
  */
 public class RobotMap {
+	// blob detector parameter for vision
+	public static final int MIN_HUE = 39;
+	public static final int MAX_HUE = 97;
+	public static final int MIN_SAT = 205;
+	public static final int MAX_SAT = 255;
+	public static final int MIN_VALUE = 34;
+	public static final int MAX_VALUE = 255;
+
 	public static final int YELLOW = 5; // PWM
 	public static final int ORANGE = 7; // PWM
 	public static final int RED = 6; // PWM
 	// public static final int BLACK = RSL
 	public static final int GREEN = 8; // PWM
-	
+
 	public static SpeedController driveFrontLeftMotor = new VictorSP(GREEN);
 	public static SpeedController driveRearLeftMotor = new VictorSP(RED);
 	public static SpeedController driveFrontRightMotor = new VictorSP(ORANGE);
