@@ -24,6 +24,8 @@ public class Drivetrain extends Subsystem {
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
 		// robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 
+		RobotMap.leftDriveEncoder.setDistancePerPulse(1);
+		RobotMap.rightDriveEncoder.setDistancePerPulse(1);
 	}
 
 	public void drive(double move, double turn) {
@@ -35,6 +37,15 @@ public class Drivetrain extends Subsystem {
 		// bot
 		robotDrive.arcadeDrive(move.getY(), -move.getZ(), true); // practice
 																	// chassis
+	}
+
+	public void resetEncoders() {
+		RobotMap.leftDriveEncoder.reset();
+		RobotMap.rightDriveEncoder.reset();
+	}
+
+	public double getEncoderDistance() {
+		return RobotMap.rightDriveEncoder.getDistance();
 	}
 
 	public void initDefaultCommand() {

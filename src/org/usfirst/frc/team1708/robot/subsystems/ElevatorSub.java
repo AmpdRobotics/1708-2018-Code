@@ -16,23 +16,49 @@ public class ElevatorSub extends Subsystem {
 	double Ki = 0;
 	double Kd = 0;
 	private PIDController controller;
+
 	public ElevatorSub() {
-	controller = new PIDController(Kp, Ki, Kd, RobotMap.elevatorEncoder, RobotMap.elevatorMotor);
+		controller = new PIDController(Kp, Ki, Kd, RobotMap.elevatorEncoder, RobotMap.elevatorMotor);
 	}
-	
+
 	public void setPosition(double height_ft) {
-		 
+		setPIDControllerState(true);
+	}
+
+	public void setPostionOI(OI oi) {
+
+	}
+
+	public void setVelocity(double speed) {
+		setPIDControllerState(false);
+		RobotMap.elevatorMotor.set(speed);
+	}
+
+	public void setPIDControllerState(boolean enabled) {
+		if (enabled) {
+			controller.enable();
+		} else {
+			controller.disable();
+		}
 	}
 	
-	public void setPostionOI(OI oi) {
-		
+	public void resetElevatorEncoder() {
+		RobotMap.elevatorEncoder.reset();
 	}
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	
+	
+	public double getPosition() {
+		return RobotMap.elevatorEncoder.getDistance();
+	}
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	public void zeroElevator() {
+
+	}
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
+
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
 }
-

@@ -36,6 +36,13 @@ public class ClawSub extends Subsystem {
 	public void close() {
 		RobotMap.clawIntakeSolenoid.set(DoubleSolenoid.Value.kReverse);
 	}
+	public void clawUp() {
+		RobotMap.clawSolenoid.set(DoubleSolenoid.Value.kForward);
+	}
+	
+	public void clawDown() {
+		RobotMap.clawSolenoid.set(DoubleSolenoid.Value.kReverse);
+	}
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
