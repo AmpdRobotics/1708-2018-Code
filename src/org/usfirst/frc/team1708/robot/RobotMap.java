@@ -37,7 +37,7 @@ public class RobotMap {
 	public static final int clawIntakeSolenoidReverse = 0;
 	public static final int clawSolenoidForward = 0;
 	public static final int clawSolenoidReverse = 0;
-	
+
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
 	public static SpeedController driveRearLeftMotor = new Spark(1);
 	public static SpeedController driveFrontRightMotor = new Spark(2);
@@ -46,20 +46,23 @@ public class RobotMap {
 	public static SpeedController intakeMotor = new VictorSP(4);
 	public static SpeedController intakeMotorB = new VictorSP(5);
 	public static SpeedController elevatorMotor = new TalonSRX(6);
-	
-	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward, driveShifterSolenoidReverse);
-	public static DoubleSolenoid clawIntakeSolenoid = new DoubleSolenoid(clawIntakeSolenoidForward, clawIntakeSolenoidReverse);
+
+	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward,
+			driveShifterSolenoidReverse);
+	public static DoubleSolenoid clawIntakeSolenoid = new DoubleSolenoid(clawIntakeSolenoidForward,
+			clawIntakeSolenoidReverse);
 	public static DoubleSolenoid clawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
 	public static Solenoid elevatorSolenoid = new Solenoid(2);
-	
+
 	public static Encoder elevatorEncoder = new Encoder(elevatorEncoderChannelA, elevatorEncoderChannelB);
 	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
 	public static Encoder rightDriveEncoder = new Encoder(rightDriveEncoderChannelA, rightDriveEncoderChannelB);
 	public static AnalogGyro gyro = new AnalogGyro(1);
-	public static DigitalInput limitSwitch = new DigitalInput(0);
-	
-	//TODO: add camera
-	
+	public static DigitalInput elevatorLimitSwitch = new DigitalInput(0);
+	public static DigitalInput cubeSensor = new DigitalInput(1);
+
+	// TODO: add camera
+
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;

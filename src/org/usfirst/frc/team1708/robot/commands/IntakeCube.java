@@ -8,38 +8,37 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ZeroElevator extends Command {
+public class IntakeCube extends Command {
 
-	public ZeroElevator() {
-		requires(Robot.elevatorSub);
+	public IntakeCube() {
+		requires(Robot.clawSub);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.clawSub.close();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.elevatorSub.setVelocity(-1);
+		Robot.clawSub.intake();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return RobotMap.elevatorLimitSwitch.get();
+		return RobotMap.cubeSensor.get();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.elevatorSub.setVelocity(0);
-		Robot.elevatorSub.resetElevatorEncoder();
-		Robot.elevatorSub.setPosition(0);
+		Robot.clawSub.intakeOff();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.elevatorSub.setVelocity(0);
+		Robot.clawSub.intakeOff();
 	}
 }
