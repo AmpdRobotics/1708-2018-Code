@@ -39,12 +39,11 @@ public class RobotMap {
 	public static final int clawSolenoidReverse = 0;
 
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
-	public static SpeedController driveRearLeftMotor = new Spark(1);
-	public static SpeedController driveFrontRightMotor = new Spark(2);
-	public static SpeedController driveRearRightMotor = new Spark(3);
+	public static SpeedController driveFrontRightMotor = new Spark(1);
+	
 
-	public static SpeedController intakeMotor = new VictorSP(4);
-	public static SpeedController intakeMotorB = new VictorSP(5);
+	public static SpeedController intakeMotor = new VictorSP(2);
+	public static SpeedController intakeMotorB = new VictorSP(3);
 	public static SpeedController elevatorMotor = new TalonSRX(6);
 
 	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward,
