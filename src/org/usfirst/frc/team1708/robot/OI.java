@@ -20,7 +20,6 @@ public class OI {
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
 	public Joystick joystickDrive = new Joystick(0);
-	public Joystick joystickMech = new Joystick(1);
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	// Once you have a button, it's trivial to bind it to a button in one of
 	// three ways:

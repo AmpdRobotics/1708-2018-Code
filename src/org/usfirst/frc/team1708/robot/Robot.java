@@ -7,7 +7,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1708.robot.subsystems.ElevatorSub;
 
 
 /**
@@ -20,6 +23,9 @@ import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
 public class Robot extends IterativeRobot {
 
 	public static Drivetrain drivetrain = new Drivetrain();
+	public static ElevatorSub elevatorSub = new ElevatorSub();
+	public static ClawSub clawSub = new ClawSub();
+	
 	public static OI oi;
 
 	Command autonomousCommand;

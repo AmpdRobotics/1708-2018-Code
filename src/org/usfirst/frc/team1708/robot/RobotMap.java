@@ -1,6 +1,13 @@
 package org.usfirst.frc.team1708.robot;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.VictorSP;
 
 /**
@@ -17,17 +24,42 @@ public class RobotMap {
 	public static final int MAX_SAT = 255;
 	public static final int MIN_VALUE = 34;
 	public static final int MAX_VALUE = 255;
+	// TODO: determine actual values
+	public static final int elevatorEncoderChannelA = 0;
+	public static final int elevatorEncoderChannelB = 0;
+	public static final int leftDriveEncoderChannelA = 0;
+	public static final int leftDriveEncoderChannelB = 0;
+	public static final int rightDriveEncoderChannelA = 0;
+	public static final int rightDriveEncoderChannelB = 0;
+	public static final int driveShifterSolenoidForward = 0;
+	public static final int driveShifterSolenoidReverse = 0;
+	public static final int clawIntakeSolenoidForward = 0;
+	public static final int clawIntakeSolenoidReverse = 0;
+	public static final int clawSolenoidForward = 0;
+	public static final int clawSolenoidReverse = 0;
+	
+	public static SpeedController driveFrontLeftMotor = new Spark(0);
+	public static SpeedController driveRearLeftMotor = new Spark(1);
+	public static SpeedController driveFrontRightMotor = new Spark(2);
+	public static SpeedController driveRearRightMotor = new Spark(3);
 
-	public static final int YELLOW = 5; // PWM
-	public static final int ORANGE = 7; // PWM
-	public static final int RED = 6; // PWM
-	// public static final int BLACK = RSL
-	public static final int GREEN = 8; // PWM
-
-	public static SpeedController driveFrontLeftMotor = new VictorSP(GREEN);
-	public static SpeedController driveRearLeftMotor = new VictorSP(RED);
-	public static SpeedController driveFrontRightMotor = new VictorSP(ORANGE);
-	public static SpeedController driveRearRightMotor = new VictorSP(YELLOW);
+	public static SpeedController intakeMotor = new VictorSP(4);
+	public static SpeedController intakeMotorB = new VictorSP(5);
+	public static SpeedController elevatorMotor = new TalonSRX(6);
+	
+	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward, driveShifterSolenoidReverse);
+	public static DoubleSolenoid clawIntakeSolenoid = new DoubleSolenoid(clawIntakeSolenoidForward, clawIntakeSolenoidReverse);
+	public static DoubleSolenoid clawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
+	public static Solenoid elevatorSolenoid = new Solenoid(2);
+	
+	public static Encoder elevatorEncoder = new Encoder(elevatorEncoderChannelA, elevatorEncoderChannelB);
+	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
+	public static Encoder rightDriveEncoder = new Encoder(rightDriveEncoderChannelA, rightDriveEncoderChannelB);
+	public static AnalogGyro gyro = new AnalogGyro(1);
+	public static DigitalInput limitSwitch = new DigitalInput(0);
+	
+	//TODO: add camera
+	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
