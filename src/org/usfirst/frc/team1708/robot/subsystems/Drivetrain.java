@@ -7,25 +7,22 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  *
  */
 public class Drivetrain extends Subsystem {
 	double Kp = .15;
-	RobotDrive robotDrive;
+	DifferentialDrive robotDrive;
 
 	public Drivetrain() {
 
-		robotDrive = new RobotDrive(RobotMap.driveFrontLeftMotor, RobotMap.driveRearLeftMotor,
-				RobotMap.driveFrontRightMotor, RobotMap.driveRearRightMotor);
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-		// robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-		// robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		robotDrive = new DifferentialDrive(RobotMap.driveFrontLeftMotor, RobotMap.driveFrontRightMotor);
 
 		RobotMap.leftDriveEncoder.setDistancePerPulse(1);
 		RobotMap.rightDriveEncoder.setDistancePerPulse(1);
+
 	}
 
 	public void drive(double move, double turn) {
@@ -36,7 +33,6 @@ public class Drivetrain extends Subsystem {
 		// robotDrive.arcadeDrive(move.getY(), move.getZ(), true); //competition
 		// bot
 		robotDrive.arcadeDrive(move.getY(), -move.getZ(), true); // practice
-																	// chassis
 	}
 
 	public void resetEncoders() {
@@ -45,7 +41,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public double getEncoderDistance() {
-		return RobotMap.rightDriveEncoder.getDistance();
+		return RobotMap.leftDriveEncoder.get();
 	}
 
 	public void initDefaultCommand() {

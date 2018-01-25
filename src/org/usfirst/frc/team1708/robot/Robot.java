@@ -12,7 +12,6 @@ import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1708.robot.subsystems.ElevatorSub;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -25,7 +24,7 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static ElevatorSub elevatorSub = new ElevatorSub();
 	public static ClawSub clawSub = new ClawSub();
-	
+
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -37,6 +36,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		RobotMap.compressor.setClosedLoopControl(true);
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

@@ -1,13 +1,17 @@
 package org.usfirst.frc.team1708.robot;
 
+import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 
 /**
@@ -26,39 +30,40 @@ public class RobotMap {
 	public static final int MAX_VALUE = 255;
 	// TODO: determine actual values
 	public static final int elevatorEncoderChannelA = 0;
-	public static final int elevatorEncoderChannelB = 0;
-	public static final int leftDriveEncoderChannelA = 0;
-	public static final int leftDriveEncoderChannelB = 0;
-	public static final int rightDriveEncoderChannelA = 0;
-	public static final int rightDriveEncoderChannelB = 0;
+	public static final int elevatorEncoderChannelB = 1;
+	public static final int leftDriveEncoderChannelA = 2;
+	public static final int leftDriveEncoderChannelB = 3;
+	public static final int rightDriveEncoderChannelA = 4;
+	public static final int rightDriveEncoderChannelB = 5;
 	public static final int driveShifterSolenoidForward = 0;
-	public static final int driveShifterSolenoidReverse = 0;
-	public static final int clawIntakeSolenoidForward = 0;
-	public static final int clawIntakeSolenoidReverse = 0;
-	public static final int clawSolenoidForward = 0;
-	public static final int clawSolenoidReverse = 0;
-
+	public static final int driveShifterSolenoidReverse = 1;
+	public static final int clawIntakeSolenoidForward = 2;
+	public static final int clawIntakeSolenoidReverse = 3;
+	public static final int clawSolenoidForward = 4;
+	public static final int clawSolenoidReverse = 5;
+	public static final int elevatorSolenoidPort = 6;
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
 	public static SpeedController driveFrontRightMotor = new Spark(1);
-	
 
 	public static SpeedController intakeMotor = new VictorSP(2);
 	public static SpeedController intakeMotorB = new VictorSP(3);
-	public static SpeedController elevatorMotor = new TalonSRX(6);
+	public static TalonSRX elevatorMotor = new TalonSRX(13);
+
+	public static Compressor compressor = new Compressor(1);
 
 	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward,
 			driveShifterSolenoidReverse);
 	public static DoubleSolenoid clawIntakeSolenoid = new DoubleSolenoid(clawIntakeSolenoidForward,
 			clawIntakeSolenoidReverse);
 	public static DoubleSolenoid clawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
-	public static Solenoid elevatorSolenoid = new Solenoid(2);
+	public static Solenoid elevatorSolenoid = new Solenoid(elevatorSolenoidPort);
 
 	public static Encoder elevatorEncoder = new Encoder(elevatorEncoderChannelA, elevatorEncoderChannelB);
 	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
 	public static Encoder rightDriveEncoder = new Encoder(rightDriveEncoderChannelA, rightDriveEncoderChannelB);
 	public static AnalogGyro gyro = new AnalogGyro(1);
-	public static DigitalInput elevatorLimitSwitch = new DigitalInput(0);
-	public static DigitalInput cubeSensor = new DigitalInput(1);
+	public static DigitalInput elevatorLimitSwitch = new DigitalInput(6);
+	public static DigitalInput cubeSensor = new DigitalInput(7);
 
 	// TODO: add camera
 
