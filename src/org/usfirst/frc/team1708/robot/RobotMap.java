@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1708.robot;
 
 import com.ctre.CANTalon;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
@@ -29,8 +29,6 @@ public class RobotMap {
 	public static final int MIN_VALUE = 34;
 	public static final int MAX_VALUE = 255;
 	// TODO: determine actual values
-	public static final int elevatorEncoderChannelA = 0;
-	public static final int elevatorEncoderChannelB = 1;
 	public static final int leftDriveEncoderChannelA = 2;
 	public static final int leftDriveEncoderChannelB = 3;
 	public static final int rightDriveEncoderChannelA = 4;
@@ -47,7 +45,6 @@ public class RobotMap {
 
 	public static SpeedController intakeMotor = new VictorSP(2);
 	public static SpeedController intakeMotorB = new VictorSP(3);
-	public static TalonSRX elevatorMotor = new TalonSRX(13);
 
 	public static Compressor compressor = new Compressor(1);
 
@@ -58,7 +55,6 @@ public class RobotMap {
 	public static DoubleSolenoid clawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
 	public static Solenoid elevatorSolenoid = new Solenoid(elevatorSolenoidPort);
 
-	public static Encoder elevatorEncoder = new Encoder(elevatorEncoderChannelA, elevatorEncoderChannelB);
 	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
 	public static Encoder rightDriveEncoder = new Encoder(rightDriveEncoderChannelA, rightDriveEncoderChannelB);
 	public static AnalogGyro gyro = new AnalogGyro(1);

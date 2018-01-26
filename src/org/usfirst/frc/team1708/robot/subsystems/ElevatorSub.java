@@ -4,6 +4,9 @@ import org.usfirst.frc.team1708.robot.OI;
 import org.usfirst.frc.team1708.robot.Robot;
 import org.usfirst.frc.team1708.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,48 +15,40 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class ElevatorSub extends Subsystem {
-	double Kp = 1;
-	double Ki = 0;
-	double Kd = 0;
-	private PIDController controller;
+	private double feetToTicks = 2;
+	private double zeroPosition = 0;
+	private WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(13);
 
 	public ElevatorSub() {
-		controller = new PIDController(Kp, Ki, Kd, RobotMap.elevatorEncoder, RobotMap.elevatorMotor);
 	}
 
 	public void setPosition(double height_ft) {
-		setPIDControllerState(true);
+		double numTicks = feetToTicks * height_ft + zeroPosition;
+		elevatorMotor.set(ControlMode.Position, numTicks);
 	}
 
 	public void setPostionOI(OI oi) {
 
 	}
 
-	public void setVelocity(double speed) {
-		setPIDControllerState(false);
-		RobotMap.elevatorMotor.set(speed);
+	public void setVelocity(double speed_fps) {
+		double ticksPerSecond = feetToTicks * speed_fps;
+		elevatorMotor.set(ControlMode.Velocity, ticksPerSecond);
 	}
 
-	public void setPIDControllerState(boolean enabled) {
-		if (enabled) {
-			controller.enable();
-		} else {
-			controller.disable();
-		}
-	}
-	
 	public void resetElevatorEncoder() {
-		RobotMap.elevatorEncoder.reset();
+		zeroPosition = getPosition();
 	}
-	
-	
+
 	public double getPosition() {
-		return RobotMap.elevatorEncoder.getDistance();
-	}
-
-	public void zeroElevator() {
+		return elevatorMotor.getSelectedSensorPosition(0);
 
 	}
+
+	public double getPositionFeet() {
+		return getPosition() / feetToTicks;
+	}
+
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
