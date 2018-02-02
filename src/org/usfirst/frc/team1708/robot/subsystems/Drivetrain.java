@@ -1,8 +1,10 @@
 package org.usfirst.frc.team1708.robot.subsystems;
 
+import org.usfirst.frc.team1708.robot.Robot;
 import org.usfirst.frc.team1708.robot.RobotMap;
 import org.usfirst.frc.team1708.robot.commands.JoystickDrive;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -24,6 +26,7 @@ public class Drivetrain extends Subsystem {
 		RobotMap.rightDriveEncoder.setDistancePerPulse(1);
 
 	}
+
 
 	public void drive(double move, double turn) {
 		robotDrive.arcadeDrive(move, turn);

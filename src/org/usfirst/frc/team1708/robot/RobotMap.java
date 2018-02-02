@@ -46,7 +46,7 @@ public class RobotMap {
 	public static SpeedController intakeMotor = new VictorSP(2);
 	public static SpeedController intakeMotorB = new VictorSP(3);
 
-	public static Compressor compressor = new Compressor(1);
+	//public static Compressor compressor = new Compressor(1);
 
 	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward,
 			driveShifterSolenoidReverse);
@@ -60,6 +60,7 @@ public class RobotMap {
 	public static AnalogGyro gyro = new AnalogGyro(1);
 	public static DigitalInput elevatorLimitSwitch = new DigitalInput(6);
 	public static DigitalInput cubeSensor = new DigitalInput(7);
+	
 
 	// TODO: add camera
 

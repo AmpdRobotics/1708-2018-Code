@@ -7,10 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SwitchLevel extends Command {
-	private double switchHeightLevelFeet = 2;
+public class AbstractGoToLevelCommand extends Command {
 
-	public SwitchLevel() {
+	protected double setHeightLevelFeet = 0;
+
+	public AbstractGoToLevelCommand() {
 		requires(Robot.elevatorSub);
 
 		// Use requires() here to declare subsystem dependencies
@@ -19,18 +20,19 @@ public class SwitchLevel extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("starting switch level command");		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.elevatorSub.setPosition(switchHeightLevelFeet);
+		Robot.elevatorSub.setPosition(setHeightLevelFeet);
+		
 
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
+	// Make this retuSrn true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-
-		return Robot.elevatorSub.getPositionFeet() == switchHeightLevelFeet;
+		return Robot.elevatorSub.getPositionFeet() == setHeightLevelFeet;
 	}
 
 	// Called once after isFinished returns true
@@ -41,6 +43,6 @@ public class SwitchLevel extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.elevatorSub.setVelocity(0);
+		
 	}
 }
