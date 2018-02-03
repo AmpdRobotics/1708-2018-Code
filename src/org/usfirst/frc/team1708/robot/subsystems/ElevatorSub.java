@@ -19,9 +19,6 @@ public class ElevatorSub extends Subsystem {
 	private double zeroPosition = 0;
 	private int timeOutMS = 10;
 	private int pidIndex = 0;
-	private double kp = 1;
-	private double ki = 0;
-	private double kd = 0;
 	
 	private TalonSRX  elevatorMotor = new TalonSRX (13);
 

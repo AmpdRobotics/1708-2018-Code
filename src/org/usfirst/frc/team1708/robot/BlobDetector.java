@@ -1,18 +1,16 @@
 package org.usfirst.frc.team1708.robot;
 
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
-import edu.wpi.first.wpilibj.vision.*;
-import java.awt.List;
 import java.util.ArrayList;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
-import org.opencv.videoio.VideoCapture;
-import org.usfirst.frc.team1708.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.vision.VisionPipeline;
 
 public class BlobDetector implements VisionPipeline {
 	// declares variables for HSV thresholds
