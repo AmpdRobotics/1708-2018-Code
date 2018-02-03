@@ -3,6 +3,7 @@ package org.usfirst.frc.team1708.robot.subsystems;
 import org.usfirst.frc.team1708.robot.RobotMap;
 import org.usfirst.frc.team1708.robot.commands.JoystickDrive;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,7 +24,6 @@ public class Drivetrain extends Subsystem {
 
 	}
 
-
 	public void drive(double move, double turn) {
 		robotDrive.arcadeDrive(move, turn);
 	}
@@ -41,6 +41,15 @@ public class Drivetrain extends Subsystem {
 
 	public double getEncoderDistance() {
 		return RobotMap.leftDriveEncoder.get();
+	}
+
+	public void setDriveShifter(boolean isHigh) {
+		if (isHigh) {
+			RobotMap.driveShifter.set(DoubleSolenoid.Value.kReverse);
+		} else {
+			RobotMap.driveShifter.set(DoubleSolenoid.Value.kForward);
+		}
+
 	}
 
 	public void initDefaultCommand() {

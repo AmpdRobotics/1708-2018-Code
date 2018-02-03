@@ -28,13 +28,15 @@ public class RobotMap {
 	public static final int leftDriveEncoderChannelB = 3;
 	public static final int rightDriveEncoderChannelA = 4;
 	public static final int rightDriveEncoderChannelB = 5;
-	public static final int driveShifterSolenoidForward = 0;
 	public static final int driveShifterSolenoidReverse = 1;
-	public static final int clawIntakeSolenoidForward = 2;
-	public static final int clawIntakeSolenoidReverse = 3;
-	public static final int clawSolenoidForward = 4;
+	public static final int driveShifterSolenoidForward = 2;
+	public static final int clawIntakeSolenoidForward = 3;
+	public static final int clawIntakeSolenoidReverse = 4;
+	public static final int clawSolenoidForward = 6;
 	public static final int clawSolenoidReverse = 5;
-	public static final int elevatorSolenoidPort = 6;
+	public static final int elevatorSolenoidPort = 7;
+	public static final int rampSolenoidPort = 0;
+	
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
 	public static SpeedController driveFrontRightMotor = new Spark(1);
 
@@ -49,7 +51,8 @@ public class RobotMap {
 			clawIntakeSolenoidReverse);
 	public static DoubleSolenoid clawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
 	public static Solenoid elevatorSolenoid = new Solenoid(elevatorSolenoidPort);
-
+	public static Solenoid rampSolenoid = new Solenoid(rampSolenoidPort);
+	
 	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
 	public static Encoder rightDriveEncoder = new Encoder(rightDriveEncoderChannelA, rightDriveEncoderChannelB);
 	public static AnalogGyro gyro = new AnalogGyro(1);
