@@ -1,13 +1,22 @@
 
 package org.usfirst.frc.team1708.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 
+import org.opencv.core.Mat;
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team1708.robot.subsystems.CameraSub;
 import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1708.robot.subsystems.ElevatorSub;
@@ -26,13 +35,14 @@ public class Robot extends IterativeRobot {
 	public static ElevatorSub elevatorSub = new ElevatorSub();
 	public static ClawSub clawSub = new ClawSub();
 	public static RampsSub rampsSub = new RampsSub();
+	//public static CameraSub cameraSub = new CameraSub();
 	public static boolean isEndGame = false;
 
 	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	Thread visionThread;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -46,6 +56,25 @@ public class Robot extends IterativeRobot {
 		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(320, 240);
+        camera.setExposureManual(1);
+        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
+        visionThread = new VisionThread(camera, new BlobDetector(19,46,150,255,26,59), pipeline -> {
+        	outputStream.putFrame(pipeline.getMask());
+            //if (!pipeline.filterContoursOutput().isEmpty()) {
+             //   Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+              //  Mat outputRect;
+                //synchronized (imgLock) {
+//                	outputRect = new Mat(pipeline.blurOutput(),r);
+//                    centerX = r.x + (r.width / 2); }
+//                System.out.println(centerX);
+//                outputStream.putFrame(outputRect);
+//            }
+        });
+    	visionThread.start();
+    	
 	}
 
 	/**

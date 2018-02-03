@@ -64,7 +64,7 @@ public class RobotMap {
 	public static DigitalInput elevatorLimitSwitch = new DigitalInput(6);
 	public static DigitalInput cubeSensor = new DigitalInput(7);
 	
-
+	public static final int cam0 = 0;
 	// TODO: add camera
 
 	// For example to map the left and right motors, you could define the
