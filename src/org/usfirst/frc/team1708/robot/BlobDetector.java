@@ -3,7 +3,6 @@ package org.usfirst.frc.team1708.robot;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import org.opencv.core.Core;
@@ -11,8 +10,6 @@ import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
-import org.opencv.videoio.VideoCapture;
-import org.usfirst.frc.team1708.robot.RobotMap;
 
 public class BlobDetector {
 // declares variables for HSV thresholds
