@@ -5,6 +5,8 @@ import org.usfirst.frc.team1708.robot.commands.GoToScaleHighLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleLowLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleMediumLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToSwitchLevel;
+import org.usfirst.frc.team1708.robot.commands.ShiftHighGear;
+import org.usfirst.frc.team1708.robot.commands.ShiftLowGear;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -29,7 +31,7 @@ public class OI {
 	public Joystick joystickDrive = new Joystick(0);
 
 	public OI() {
-		Button button = new JoystickButton(joystickDrive, 2);
+		Button switchHeight = new JoystickButton(joystickDrive, 2);
 		Button shiftHigh = new JoystickButton(joystickDrive, 3);
 		Button shiftLow = new JoystickButton(joystickDrive, 4);
 		Button lowScaleHeight = new JoystickButton(joystickDrive, 5);
@@ -54,14 +56,13 @@ public class OI {
 		// command
 		// until it is finished as determined by it's isFinished method.
 		// button.whenReleased(new ExampleCommand());
-		button.whenPressed(new GoToSwitchLevel());
+		switchHeight.whenPressed(new GoToSwitchLevel());
 		highScaleHeight.whenPressed(new GoToScaleHighLevel());
 		lowScaleHeight.whenPressed(new GoToScaleLowLevel());
 		mediumScaleHeight.whenPressed(new GoToScaleMediumLevel());
 		groundLevelHeight.whenPressed(new GoToGroundLevel());
-		
-		
-		
-		
+		shiftHigh.whenPressed(new ShiftHighGear());
+		shiftLow.whenPressed(new ShiftLowGear());
+
 	}
 }

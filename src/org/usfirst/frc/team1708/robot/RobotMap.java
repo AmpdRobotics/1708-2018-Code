@@ -33,9 +33,9 @@ public class RobotMap {
 	public static final int leftDriveEncoderChannelB = 3;
 	public static final int rightDriveEncoderChannelA = 4;
 	public static final int rightDriveEncoderChannelB = 5;
-	public static final int driveShifterSolenoidForward = 0;
+	public static final int driveShifterSolenoidForward = 2;
 	public static final int driveShifterSolenoidReverse = 1;
-	public static final int clawIntakeSolenoidForward = 2;
+	public static final int clawIntakeSolenoidForward = 0;
 	public static final int clawIntakeSolenoidReverse = 3;
 	public static final int clawSolenoidForward = 4;
 	public static final int clawSolenoidReverse = 5;
