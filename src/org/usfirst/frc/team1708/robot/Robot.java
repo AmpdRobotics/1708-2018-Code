@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1708.robot.subsystems.ElevatorSub;
+import org.usfirst.frc.team1708.robot.subsystems.RampsSub;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +25,8 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static ElevatorSub elevatorSub = new ElevatorSub();
 	public static ClawSub clawSub = new ClawSub();
+	public static RampsSub rampsSub = new RampsSub();
+	public static boolean isEndGame = false;
 
 	public static OI oi;
 
@@ -37,7 +40,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		//RobotMap.compressor.setClosedLoopControl(true);
+	
 		oi = new OI();
+		
 		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

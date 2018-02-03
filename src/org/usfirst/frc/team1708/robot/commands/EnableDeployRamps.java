@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DeployRamps extends Command {
+public class EnableDeployRamps extends Command {
 
-    public DeployRamps() {
-    	requires(Robot.rampsSub);
+    public EnableDeployRamps() {
+    	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,9 +21,7 @@ public class DeployRamps extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.isEndGame) {
-    		Robot.rampsSub.releaseRamps();
-    	}
+    	Robot.isEndGame = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
