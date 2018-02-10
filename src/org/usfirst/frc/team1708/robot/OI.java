@@ -1,10 +1,12 @@
 package org.usfirst.frc.team1708.robot;
 
+import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
 import org.usfirst.frc.team1708.robot.commands.GoToGroundLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleHighLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleLowLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleMediumLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToSwitchLevel;
+import org.usfirst.frc.team1708.robot.commands.JoystickDrive;
 import org.usfirst.frc.team1708.robot.commands.ShiftHighGear;
 import org.usfirst.frc.team1708.robot.commands.ShiftLowGear;
 
@@ -31,13 +33,16 @@ public class OI {
 	public Joystick joystickDrive = new Joystick(0);
 
 	public OI() {
-		Button switchHeight = new JoystickButton(joystickDrive, 2);
-		Button shiftHigh = new JoystickButton(joystickDrive, 3);
+//		Button switchHeight = new JoystickButton(joystickDrive, 2);
+//		Button shiftHigh = new JoystickButton(joystickDrive, 3);
+		Button ddrForward = new JoystickButton(joystickDrive, 3);
 		Button shiftLow = new JoystickButton(joystickDrive, 4);
 		Button lowScaleHeight = new JoystickButton(joystickDrive, 5);
 		Button mediumScaleHeight = new JoystickButton(joystickDrive, 6);
 		Button highScaleHeight = new JoystickButton(joystickDrive, 7);
 		Button groundLevelHeight = new JoystickButton(joystickDrive, 8);
+		
+		Button centerOnBlob = new JoystickButton(joystickDrive, 2);
 		//// TRIGGERING COMMANDS WITH BUTTONS
 		// Once you have a button, it's trivial to bind it to a button in one of
 		// three ways:
@@ -56,13 +61,16 @@ public class OI {
 		// command
 		// until it is finished as determined by it's isFinished method.
 		// button.whenReleased(new ExampleCommand());
-		switchHeight.whenPressed(new GoToSwitchLevel());
+		//switchHeight.whenPressed(new GoToSwitchLevel());
 		highScaleHeight.whenPressed(new GoToScaleHighLevel());
 		lowScaleHeight.whenPressed(new GoToScaleLowLevel());
 		mediumScaleHeight.whenPressed(new GoToScaleMediumLevel());
 		groundLevelHeight.whenPressed(new GoToGroundLevel());
-		shiftHigh.whenPressed(new ShiftHighGear());
+		//shiftHigh.whenPressed(new ShiftHighGear());
 		shiftLow.whenPressed(new ShiftLowGear());
+		ddrForward.whileHeld(new JoystickDrive());
+		centerOnBlob.whileHeld(new CenterOnBlob());
+
 
 	}
 }

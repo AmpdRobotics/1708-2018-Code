@@ -1,7 +1,14 @@
 package org.usfirst.frc.team1708.robot.subsystems;
 
+import java.util.Collections;
+
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team1708.robot.Blob;
+import org.usfirst.frc.team1708.robot.BlobDetector;
 import org.usfirst.frc.team1708.robot.RobotMap;
 
 import edu.wpi.cscore.CvSink;
@@ -11,38 +18,46 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 
 /**
  *
  */
 public class CameraSub extends Subsystem {
+	private Thread visionThread;
+	private BlobDetector detector;
+	private UsbCamera camera;
+
 	public CameraSub() {
-        new Thread(new Runnable() {
-			@Override
-			public void run() {
-			    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-			    camera.setResolution(640, 480);
-			    
-			    CvSink cvSink = CameraServer.getInstance().getVideo();
-			    CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
-			    
-			    Mat source = new Mat();
-			    Mat output = new Mat();
-			    System.out.println("Before grabbing image");
-			    while(!Thread.interrupted()) {
-			    	System.out.println("grabbing image");
-			        cvSink.grabFrame(source);
-			        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-			        outputStream.putFrame(output);
-			    }
-			    System.out.println("after grabbing image");
-			}
-		}).start();
+		detector = new BlobDetector(39,97,205,255,34,255);
+		camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(320, 240);
+        camera.setFPS(1);
+        camera.setExposureManual(1);
+        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
+        visionThread = new VisionThread(camera, detector, pipeline -> {
+        	Mat mask = pipeline.getMask();
+        	Blob biggestBlob = pipeline.getBiggestBlob();
+        	if (biggestBlob != null){
+        		Imgproc.circle(mask, biggestBlob.getCenter(), 6, new Scalar(120));
+        	}
+        	outputStream.putFrame(mask);
+        	
+        });
+    	visionThread.start();
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public Blob getBiggestBlob(){
+    	return detector.getBiggestBlob();
+    }
+    
+    public Size getResolution(){
+    	return new Size(320, 240);
     }
 }
 

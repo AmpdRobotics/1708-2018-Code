@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1708.robot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -22,7 +23,9 @@ public class BlobDetector implements VisionPipeline {
 	private int maxValue;
 	private Mat mask;
 	private Mat hsvMat;
-
+	
+	private ArrayList<Blob> blobs;
+	
 	// constructor for blob detector
 	public BlobDetector(int minHue, int maxHue, int minSat, int maxSat, int minValue, int maxValue) {
 		this.minHue = minHue;
@@ -33,11 +36,15 @@ public class BlobDetector implements VisionPipeline {
 		this.maxValue = maxValue;
 		this.mask = new Mat();
 		this.hsvMat = new Mat();
+		this.blobs = new ArrayList<Blob>();
 	}
 
-	// Detects blobs in image within given thresholds
-	public ArrayList<Point> detect(Mat image) {
-		Mat hsvMat = new Mat();
+
+	@Override
+	public void process(Mat image) {
+		// TODO Auto-generated method stub
+//		System.out.println("Width: " + image.width() + ", Height: " + image.height() + ", Channels: " + image.channels()
+//				+ ", Dims: " + image.dims());
 		// convert image to HSV
 		Imgproc.cvtColor(image, hsvMat, Imgproc.COLOR_RGB2HSV);
 		// Outputs a mask, thresholds the input to the given ranges
@@ -46,34 +53,35 @@ public class BlobDetector implements VisionPipeline {
 		ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 		// finds the contours and the mask for image
 		Imgproc.findContours(mask, contours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
-		ArrayList<Point> points = new ArrayList<Point>();
+
+		blobs.clear();
 		// finds the x and y points of the contours and finds centers of the
 		// contours
 		for (int i = 0; i < contours.size(); i++) {
 			Moments m = Imgproc.moments(contours.get(i), true);
 			double x = m.get_m10() / m.get_m00();
 			double y = m.get_m01() / m.get_m00();
-			points.add(new Point(x, y));
-
+			blobs.add(new Blob(new Point(x, y), Imgproc.contourArea(contours.get(i))));
 		}
-		return points;
-
 	}
-
-	@Override
-	public void process(Mat image) {
-		// TODO Auto-generated method stub
-		System.out.println("Width: " + image.width() + ", Height: " + image.height() + ", Channels: " + image.channels()
-				+ ", Dims: " + image.dims());
-		// convert image to HSV
-		Imgproc.cvtColor(image, hsvMat, Imgproc.COLOR_RGB2HSV);
-		// Outputs a mask, thresholds the input to the given ranges
-		Core.inRange(hsvMat, new Scalar(this.minHue, this.minSat, this.minValue),
-				new Scalar(this.maxHue, this.maxSat, this.maxValue), mask);
-		
-
-	}
+	
+	
 	public Mat getMask() {
-	return mask;	
+		return mask;	
 	}
+	
+	public ArrayList<Blob> getBlobs()
+	{
+		return blobs;
+	}
+	
+	public Blob getBiggestBlob(){
+		if (blobs.isEmpty())
+		{
+			return null;
+		}
+		return Collections.max(blobs);
+	}
+	
+	
 }

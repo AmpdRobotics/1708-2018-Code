@@ -34,14 +34,13 @@ public class Robot extends IterativeRobot {
 	public static ElevatorSub elevatorSub = new ElevatorSub();
 	public static ClawSub clawSub = new ClawSub();
 	public static RampsSub rampsSub = new RampsSub();
-	//public static CameraSub cameraSub = new CameraSub();
+	public static CameraSub cameraSub = new CameraSub();
 	public static boolean isEndGame = false;
 
 	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-	Thread visionThread;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -52,28 +51,8 @@ public class Robot extends IterativeRobot {
 	
 		oi = new OI();
 		
-		
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-		
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(320, 240);
-        camera.setExposureManual(1);
-        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
-        visionThread = new VisionThread(camera, new BlobDetector(19,46,150,255,26,59), pipeline -> {
-        	outputStream.putFrame(pipeline.getMask());
-            //if (!pipeline.filterContoursOutput().isEmpty()) {
-             //   Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-              //  Mat outputRect;
-                //synchronized (imgLock) {
-//                	outputRect = new Mat(pipeline.blurOutput(),r);
-//                    centerX = r.x + (r.width / 2); }
-//                System.out.println(centerX);
-//                outputStream.putFrame(outputRect);
-//            }
-        });
-    	visionThread.start();
-    	
+		SmartDashboard.putData("Auto mode", chooser);	
 	}
 
 	/**
