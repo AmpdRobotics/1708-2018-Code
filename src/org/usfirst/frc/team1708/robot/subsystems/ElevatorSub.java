@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1708.robot.subsystems;
 
 import org.usfirst.frc.team1708.robot.OI;
+import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -45,7 +47,15 @@ public class ElevatorSub extends Subsystem {
 	}
 
 	public void setPostionOI(OI oi) {
-
+		double slow = 0.1;
+		if(oi.mechanisms.getY()<0){
+			elevatorMotor.set(ControlMode.Velocity, slow);
+		}
+		else if (oi.mechanisms.getX()>0){
+			elevatorMotor.set(ControlMode.Velocity,-slow);
+		}
+		else
+			elevatorMotor.set(ControlMode.Velocity, 0);
 	}
 
 	public void setVelocity(double speed_fps) {
@@ -72,6 +82,7 @@ public class ElevatorSub extends Subsystem {
 	// here. Call these from Commands.
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new CalibrateElevator());
 		
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
