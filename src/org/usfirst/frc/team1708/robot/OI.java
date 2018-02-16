@@ -33,12 +33,23 @@ public class OI {
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
+	
+	public static final int CONTROLLER_A_BUTTON = 2;
+	public static final int CONTROLLER_B_BUTTON = 3;
+	public static final int CONTROLLER_X_BUTTON = 1;
+	public static final int CONTROLLER_Y_BUTTON = 4;
+	public static final int CONTROLLER_START_BUTTON = 10;
+	public static final int CONTROLLER_BACK_BUTTON = 9;
+	public static final int CONTROLLER_LEFT_BUMPER = 5;
+	public static final int CONTROLLER_RIGHT_BUMPER = 6;
+
+
 	public Joystick joystickDrive = new Joystick(0);
 	public Joystick mechanisms = new Joystick(1);
 
 	public OI() {
-		Button shiftHigh = new JoystickButton(joystickDrive, 3);
-		Button shiftLow = new JoystickButton(joystickDrive, 4);
+		Button shiftHigh = new JoystickButton(joystickDrive, CONTROLLER_B_BUTTON);
+		Button shiftLow = new JoystickButton(joystickDrive, CONTROLLER_Y_BUTTON);
 	
 		
 		Button centerOnBlob = new JoystickButton(joystickDrive, 2);

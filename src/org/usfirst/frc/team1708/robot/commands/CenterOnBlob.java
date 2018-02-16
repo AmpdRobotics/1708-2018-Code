@@ -32,7 +32,7 @@ public class CenterOnBlob extends Command {
     	}
     	else {
     		System.out.println("Found blob at " + biggestBlob.getCenter());
-    		double speed = (cameraCenter - biggestBlob.getCenter().x)/(cameraCenter * 1.5);
+    		double speed = (cameraCenter - biggestBlob.getCenter().x)/(cameraCenter * 2);
     		Robot.drivetrain.drive(0, speed);
     		System.out.println("Setting Speed Vision" + speed);
     	}

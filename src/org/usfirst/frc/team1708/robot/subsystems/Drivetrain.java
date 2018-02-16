@@ -25,7 +25,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void drive(double move, double turn) {
-		robotDrive.arcadeDrive(move, turn);
+		robotDrive.arcadeDrive(move, turn, false);
 	}
 
 	public void joystickDrive(Joystick move) {

@@ -42,9 +42,6 @@ public class BlobDetector implements VisionPipeline {
 
 	@Override
 	public void process(Mat image) {
-		// TODO Auto-generated method stub
-//		System.out.println("Width: " + image.width() + ", Height: " + image.height() + ", Channels: " + image.channels()
-//				+ ", Dims: " + image.dims());
 		// convert image to HSV
 		Imgproc.cvtColor(image, hsvMat, Imgproc.COLOR_RGB2HSV);
 		// Outputs a mask, thresholds the input to the given ranges

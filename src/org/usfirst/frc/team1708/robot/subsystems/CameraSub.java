@@ -27,14 +27,17 @@ public class CameraSub extends Subsystem {
 	private Thread visionThread;
 	private BlobDetector detector;
 	private UsbCamera camera;
-
+	
+	private int image_width = 320;
+	private int image_height = 240;
+	
 	public CameraSub() {
 		detector = new BlobDetector(39,97,205,255,34,255);
 		camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(320, 240);
+        camera.setResolution(image_width, image_height);
         camera.setFPS(1);
         camera.setExposureManual(1);
-        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
+        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", image_width, image_height);
         visionThread = new VisionThread(camera, detector, pipeline -> {
         	Mat mask = pipeline.getMask();
         	Blob biggestBlob = pipeline.getBiggestBlob();
@@ -57,7 +60,7 @@ public class CameraSub extends Subsystem {
     }
     
     public Size getResolution(){
-    	return new Size(320, 240);
+    	return new Size(image_width, image_height);
     }
 }
 

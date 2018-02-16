@@ -21,17 +21,17 @@ public class ElevatorSub extends Subsystem {
 	private double zeroPosition = 0;
 	private int timeOutMS = 10;
 	private int pidIndex = 0;
-	
-	private TalonSRX  elevatorMotor = new TalonSRX (13);
+
+	private TalonSRX elevatorMotor = new TalonSRX(13);
 
 	public ElevatorSub() {
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, timeOutMS, pidIndex);
-		
+
 		elevatorMotor.configNominalOutputForward(0, timeOutMS);
 		elevatorMotor.configNominalOutputReverse(0, timeOutMS);
 		elevatorMotor.configPeakOutputForward(1, timeOutMS);
 		elevatorMotor.configPeakOutputReverse(-1, timeOutMS);
-	
+
 		elevatorMotor.configAllowableClosedloopError(0, pidIndex, timeOutMS);
 
 		elevatorMotor.config_kP(pidIndex, 0.1, timeOutMS);
@@ -41,21 +41,14 @@ public class ElevatorSub extends Subsystem {
 
 	public void setPosition(double height_ft) {
 		double numTicks = feetToTicks * height_ft + zeroPosition;
-		
+
 		elevatorMotor.set(ControlMode.Position, numTicks);
 		System.out.println("Setting position ticks to: " + numTicks + ", Zero: " + zeroPosition);
 	}
 
 	public void setPostionOI(OI oi) {
 		double slow = 0.1;
-		if(oi.mechanisms.getY()<0){
-			elevatorMotor.set(ControlMode.Velocity, slow);
-		}
-		else if (oi.mechanisms.getX()>0){
-			elevatorMotor.set(ControlMode.Velocity,-slow);
-		}
-		else
-			elevatorMotor.set(ControlMode.Velocity, 0);
+		elevatorMotor.set(ControlMode.Velocity, slow * oi.mechanisms.getY());
 	}
 
 	public void setVelocity(double speed_fps) {
@@ -65,13 +58,13 @@ public class ElevatorSub extends Subsystem {
 
 	public void resetElevatorEncoder() {
 		zeroPosition = getPosition();
-		System.out.println("Setting Zero:" +zeroPosition );
+		System.out.println("Setting Zero:" + zeroPosition);
 	}
 
 	public double getPosition() {
 		System.out.println("Sensor position at: " + elevatorMotor.getSelectedSensorPosition(0));
 		return elevatorMotor.getSelectedSensorPosition(0);
-		
+
 	}
 
 	public double getPositionFeet() {
@@ -83,7 +76,7 @@ public class ElevatorSub extends Subsystem {
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new CalibrateElevator());
-		
+
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 	}
