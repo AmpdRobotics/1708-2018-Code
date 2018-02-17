@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  *
  */
 public class Drivetrain extends Subsystem {
+
 	double Kp = .15;
 	DifferentialDrive robotDrive;
 
@@ -22,6 +23,7 @@ public class Drivetrain extends Subsystem {
 		RobotMap.leftDriveEncoder.setDistancePerPulse(1);
 		RobotMap.rightDriveEncoder.setDistancePerPulse(1);
 
+		RobotMap.gyro.initGyro();
 	}
 
 	public void drive(double move, double turn) {
@@ -38,7 +40,21 @@ public class Drivetrain extends Subsystem {
 		RobotMap.leftDriveEncoder.reset();
 		RobotMap.rightDriveEncoder.reset();
 	}
+	public void resetGyro(){
+		RobotMap.gyro.reset();
+	}
 
+
+	public void driveWithGyro(double speed, double angle) {
+		double gyroAngle = RobotMap.gyro.getAngle();
+		drive(speed, (angle - gyroAngle) * Kp);
+		System.out.println("auto gyro angle" + gyroAngle);
+	}
+	
+	public double getGyroAngle(){
+		return RobotMap.gyro.getAngle();
+	}
+	
 	public double getEncoderDistance() {
 		return RobotMap.leftDriveEncoder.get();
 	}

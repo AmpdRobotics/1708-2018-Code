@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1708.robot.subsystems;
 
 import org.usfirst.frc.team1708.robot.OI;
+import org.usfirst.frc.team1708.robot.RobotMap;
 import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -14,9 +15,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class ElevatorSub extends Subsystem {
-	private double encoderTicksPerRevolution = 1000;
+	
 	private double revolutionsPerFoot = 10;
-	private double feetToTicks = encoderTicksPerRevolution * revolutionsPerFoot;
+	private double feetToTicks = RobotMap.ENCODER_TICKS_PER_REVOLUTION * revolutionsPerFoot;
 
 	private double zeroPosition = 0;
 	private int timeOutMS = 10;

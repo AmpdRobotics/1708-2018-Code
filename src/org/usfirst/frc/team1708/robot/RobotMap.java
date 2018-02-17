@@ -23,6 +23,9 @@ public class RobotMap {
 	public static final int MAX_SAT = 255;
 	public static final int MIN_VALUE = 34;
 	public static final int MAX_VALUE = 255;
+	
+	public static final int ENCODER_TICKS_PER_REVOLUTION = 128;
+	
 	// TODO: determine actual values
 	public static final int leftDriveEncoderChannelA = 2;
 	public static final int leftDriveEncoderChannelB = 3;
