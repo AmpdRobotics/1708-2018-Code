@@ -23,9 +23,9 @@ public class RobotMap {
 	public static final int MAX_SAT = 255;
 	public static final int MIN_VALUE = 34;
 	public static final int MAX_VALUE = 255;
-	
+
 	public static final int ENCODER_TICKS_PER_REVOLUTION = 128;
-	
+
 	// TODO: determine actual values
 	public static final int leftDriveEncoderChannelA = 2;
 	public static final int leftDriveEncoderChannelB = 3;
@@ -39,29 +39,27 @@ public class RobotMap {
 	public static final int clawSolenoidReverse = 5;
 	public static final int elevatorSolenoidPort = 7;
 	public static final int rampSolenoidPort = 0;
-	
+
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
 	public static SpeedController driveFrontRightMotor = new Spark(1);
 
 	public static SpeedController intakeMotor = new VictorSP(2);
 	public static SpeedController intakeMotorB = new VictorSP(3);
 
-	//public static Compressor compressor = new Compressor(1);
-
 	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward,
 			driveShifterSolenoidReverse);
 	public static DoubleSolenoid clawIntakeSolenoid = new DoubleSolenoid(clawIntakeSolenoidForward,
 			clawIntakeSolenoidReverse);
-	public static DoubleSolenoid clawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
+	public static DoubleSolenoid dropClawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
 	public static Solenoid elevatorSolenoid = new Solenoid(elevatorSolenoidPort);
 	public static Solenoid rampSolenoid = new Solenoid(rampSolenoidPort);
-	
+
 	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
 	public static Encoder rightDriveEncoder = new Encoder(rightDriveEncoderChannelA, rightDriveEncoderChannelB);
 	public static AnalogGyro gyro = new AnalogGyro(1);
 	public static DigitalInput elevatorLimitSwitch = new DigitalInput(6);
 	public static DigitalInput cubeSensor = new DigitalInput(7);
-	
+
 	public static final int cam0 = 0;
 	// TODO: add camera
 

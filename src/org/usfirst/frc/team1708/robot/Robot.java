@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team1708.robot.commands.AutoDriveToLine;
 import org.usfirst.frc.team1708.robot.subsystems.CameraSub;
 import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
@@ -41,18 +42,25 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		//RobotMap.compressor.setClosedLoopControl(true);
-	
+
 		oi = new OI();
-		
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);	
+
+		chooser.addObject("My Auto", new AutoDriveToLine());
+		SmartDashboard.putData(drivetrain);
+		SmartDashboard.putData(clawSub);
+		SmartDashboard.putData(elevatorSub);
+		SmartDashboard.putData(rampsSub);
+		SmartDashboard.putData(cameraSub);
+		SmartDashboard.putData(Scheduler.getInstance());
+
+		SmartDashboard.putData("Drive To line", chooser);
 	}
 
 	/**

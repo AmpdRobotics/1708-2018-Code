@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoDriveToLine extends CommandGroup {
 
 	public AutoDriveToLine() {
+		addSequential(new DropClaw());
 		addSequential(new DriveForDistance(13), 5);
 
 		// Add Commands here:
