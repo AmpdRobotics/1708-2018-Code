@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1708.robot;
 
+import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
 import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
 import org.usfirst.frc.team1708.robot.commands.CubeDrop;
 import org.usfirst.frc.team1708.robot.commands.CubeOuttake;
@@ -50,7 +51,6 @@ public class OI {
 	public OI() {
 		Button shiftHigh = new JoystickButton(joystickDrive, CONTROLLER_B_BUTTON);
 		Button shiftLow = new JoystickButton(joystickDrive, CONTROLLER_Y_BUTTON);
-	
 		
 		Button centerOnBlob = new JoystickButton(joystickDrive, 2);
 		
@@ -93,7 +93,7 @@ public class OI {
 		cubeDrop.whenPressed(new CubeDrop());
 		cubeOuttake.whenPressed(new CubeOuttake());
 		cubeIntake.whenPressed(new IntakeCube());
-		
+	
 
 	}
 }
