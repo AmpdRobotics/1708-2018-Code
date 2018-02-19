@@ -24,7 +24,7 @@ public class JoystickDrive extends Command {
 	protected void execute() {
 		System.out.println("joystick");
 
-		Robot.drivetrain.joystickDrive(Robot.oi.joystickDrive);
+		Robot.drivetrain.joystickDrive(Robot.oi.joystickDrive);              
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

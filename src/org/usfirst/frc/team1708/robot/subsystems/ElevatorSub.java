@@ -6,6 +6,7 @@ import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,15 +16,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class ElevatorSub extends Subsystem {
-	
+	private double encoderTicksPerRevolution = 1024;
 	private double revolutionsPerFoot = 10;
-	private double feetToTicks = RobotMap.ENCODER_TICKS_PER_REVOLUTION * revolutionsPerFoot;
+	private double feetToTicks = encoderTicksPerRevolution * revolutionsPerFoot;
 
 	private double zeroPosition = 0;
 	private int timeOutMS = 10;
 	private int pidIndex = 0;
 	
-	private TalonSRX  elevatorMotor = new TalonSRX (13);
+	private WPI_TalonSRX  elevatorMotor = new WPI_TalonSRX (13);
 
 	public ElevatorSub() {
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, timeOutMS, pidIndex);
@@ -48,8 +49,8 @@ public class ElevatorSub extends Subsystem {
 	}
 
 	public void setPostionOI(OI oi) {
-		double slow = 0.1;
-		elevatorMotor.set(ControlMode.Velocity, slow* oi.mechanisms.getY());
+		double slow = 0.7;
+		elevatorMotor.set(ControlMode.PercentOutput, slow* oi.mechanisms.getY());
 	}
 
 	public void setVelocity(double speed_fps) {

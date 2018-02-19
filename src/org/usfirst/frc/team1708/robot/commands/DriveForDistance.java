@@ -9,8 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveForDistance extends Command {
+	private int encoderTicksPerRevolution = 128;
+
 	private double revolutionsPerFoot = 1.57;
-	private double feetToTicks = RobotMap.ENCODER_TICKS_PER_REVOLUTION * revolutionsPerFoot;
+	private double feetToTicks = encoderTicksPerRevolution * revolutionsPerFoot;
 	private double distance_ticks;
 
 	public DriveForDistance(double distance_ft) {
@@ -29,7 +31,7 @@ public class DriveForDistance extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.drivetrain.driveWithGyro(.75, 0);
-		
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

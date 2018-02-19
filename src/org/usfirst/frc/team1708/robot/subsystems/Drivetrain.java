@@ -40,21 +40,21 @@ public class Drivetrain extends Subsystem {
 		RobotMap.leftDriveEncoder.reset();
 		RobotMap.rightDriveEncoder.reset();
 	}
-	public void resetGyro(){
+
+	public void resetGyro() {
 		RobotMap.gyro.reset();
 	}
-
 
 	public void driveWithGyro(double speed, double angle) {
 		double gyroAngle = RobotMap.gyro.getAngle();
 		drive(speed, (angle - gyroAngle) * Kp);
 		System.out.println("auto gyro angle" + gyroAngle);
 	}
-	
-	public double getGyroAngle(){
+
+	public double getGyroAngle() {
 		return RobotMap.gyro.getAngle();
 	}
-	
+
 	public double getEncoderDistance() {
 		return RobotMap.leftDriveEncoder.get();
 	}
