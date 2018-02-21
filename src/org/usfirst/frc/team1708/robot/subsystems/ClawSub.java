@@ -29,13 +29,6 @@ public class ClawSub extends Subsystem {
 		setRollers(intakeOffSpeed);
 	}
 
-	public void open() {
-		RobotMap.clawIntakeSolenoid.set(DoubleSolenoid.Value.kForward);
-	}
-
-	public void close() {
-		RobotMap.clawIntakeSolenoid.set(DoubleSolenoid.Value.kReverse);
-	}
 	public void clawUp() {
 		RobotMap.dropClawSolenoid.set(DoubleSolenoid.Value.kForward);
 	}
