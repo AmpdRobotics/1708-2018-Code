@@ -23,7 +23,6 @@ public class Drivetrain extends Subsystem {
 		RobotMap.leftDriveEncoder.setDistancePerPulse(1);
 		RobotMap.rightDriveEncoder.setDistancePerPulse(1);
 
-		RobotMap.gyro.initGyro();
 	}
 
 	public void drive(double move, double turn) {
@@ -34,6 +33,8 @@ public class Drivetrain extends Subsystem {
 		// robotDrive.arcadeDrive(move.getY(), move.getZ(), true); //competition
 		// bot
 		robotDrive.arcadeDrive(move.getY(), -move.getZ(), true); // practice
+		System.out.println("auto gyro angle" + RobotMap.gyro.getAngle());
+
 	}
 
 	public void resetEncoders() {
@@ -47,8 +48,12 @@ public class Drivetrain extends Subsystem {
 
 	public void driveWithGyro(double speed, double angle) {
 		double gyroAngle = RobotMap.gyro.getAngle();
-		drive(speed, (angle - gyroAngle) * Kp);
 		System.out.println("auto gyro angle" + gyroAngle);
+		if (angle - gyroAngle < 180) {
+			drive(speed, -(angle - gyroAngle) * Kp);
+		} else {
+			drive(speed, (angle - gyroAngle) * Kp);
+		}
 	}
 
 	public double getGyroAngle() {

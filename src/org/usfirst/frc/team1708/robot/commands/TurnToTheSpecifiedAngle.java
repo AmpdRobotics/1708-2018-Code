@@ -12,7 +12,14 @@ public class TurnToTheSpecifiedAngle extends Command {
 	private double angle_deg;
 
 	public TurnToTheSpecifiedAngle(double angle_deg) {
-		this.angle_deg = angle_deg;
+		if (angle_deg < 0){
+			this.angle_deg = 360 + angle_deg;
+		}
+		else
+		{
+			this.angle_deg = angle_deg;
+		}
+		
 		requires(Robot.drivetrain);
 
 		// Use requires() here to declare subsystem dependencies
@@ -31,7 +38,7 @@ public class TurnToTheSpecifiedAngle extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Robot.drivetrain.getGyroAngle() >= angle_deg) {
+		if (Robot.drivetrain.getGyroAngle() % 360 >= angle_deg) {
 			return true;
 		} else {
 			return false;
