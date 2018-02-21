@@ -18,27 +18,39 @@ public class AutoScoreSwitch extends CommandGroup {
 	private double centerToSideDistance = oppositeSideDistance * .5;
 
 	public AutoScoreSwitch(FieldPosition switch_position, FieldPosition robot_position) {
-		if (switch_position == robot_position) {
-			addSequential(new DriveForDistance(robotToSwitchDistance));
-		} 
-		else{
-			addSequential(new DriveForDistance(centerToSwitchDistance));
+		// Drive to the halfway point between the wall and the switch
+		addSequential(new DriveForDistance(centerToSwitchDistance));
+
+		// If we are on the same side as the switch, drive half
+		if (switch_position != robot_position) {			
+			// Turn to face the direction of the switch
 			if (switch_position == FieldPosition.left) {
 				addSequential(new TurnToTheSpecifiedAngle(90));
 			} else if (switch_position == FieldPosition.right) {
 				addSequential(new TurnToTheSpecifiedAngle(-90));
 			}
-			
+								
+			// Drive to the switch side of the field
 			if (robot_position == FieldPosition.center) {
 				addSequential(new DriveForDistance(centerToSideDistance));
 			}
 			else {
 				addSequential(new DriveForDistance(oppositeSideDistance));
 			}
+			
+			// Turn to face the switch
 			addSequential(new TurnToTheSpecifiedAngle(0));
-			addSequential(new DriveForDistance(centerToSwitchDistance));
 		}
+		
+		// Center on the switch
 		addSequential(new CenterOnBlob(), centerTimeoutSeconds);
-		addSequential(new CubeDrop());
+		
+		addSequential(new GoToSwitchLevel());
+		
+		// Drive the rest of the way to the switch
+		addSequential(new DriveForDistance(centerToSwitchDistance));
+		
+		// Drop the cube
+		addSequential(new CubeOuttake());
 	}
 }
