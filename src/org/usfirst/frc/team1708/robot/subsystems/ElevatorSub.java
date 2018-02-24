@@ -1,15 +1,12 @@
 package org.usfirst.frc.team1708.robot.subsystems;
 
 import org.usfirst.frc.team1708.robot.OI;
-import org.usfirst.frc.team1708.robot.RobotMap;
 import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -27,8 +24,10 @@ public class ElevatorSub extends Subsystem {
 	
 	
 	private WPI_TalonSRX  elevatorMotor = new WPI_TalonSRX (13);
+	private WPI_TalonSRX elevatorMotor2 = new WPI_TalonSRX(14);
 
 	public ElevatorSub() {
+		elevatorMotor2.set(ControlMode.Follower, 13);
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, timeOutMS, pidIndex);
 		
 		elevatorMotor.configNominalOutputForward(0, timeOutMS);
