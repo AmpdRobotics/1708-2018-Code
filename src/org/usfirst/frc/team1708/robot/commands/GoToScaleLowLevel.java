@@ -10,7 +10,7 @@ public class GoToScaleLowLevel extends AbstractGoToLevelCommand {
 
 	public GoToScaleLowLevel() {
 		requires(Robot.elevatorSub);
-		this.setHeightLevelFeet = 3;
+		this.setHeightLevelFeet = 4;
 		
 
 }

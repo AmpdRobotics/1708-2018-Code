@@ -28,6 +28,7 @@ public class ElevatorSub extends Subsystem {
 	private WPI_TalonSRX elevatorMotor2 = new WPI_TalonSRX(14);
 
 	public ElevatorSub() {
+		elevatorMotor2.setInverted(true);
 		elevatorMotor2.set(ControlMode.Follower, 13);
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, timeOutMS, pidIndex);
 
@@ -108,6 +109,15 @@ public class ElevatorSub extends Subsystem {
 	public double getSpeedFromJoystick(OI oi) {
 		double slow = 0.5;
 		return slow * oi.mechanisms.getY();
+
+	}
+
+	public boolean isGoingDown() {
+		if (elevatorMotor.get() < 0) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 	// Put methods for controlling this subsystem

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1708.robot.commands;
 
 import org.usfirst.frc.team1708.robot.Robot;
+import org.usfirst.frc.team1708.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -33,6 +34,10 @@ public class AbstractGoToLevelCommand extends Command {
 	// Make this retuSrn true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		if (Math.abs(Robot.elevatorSub.getPositionFeet() - setHeightLevelFeet) <= elevatorTolerance) {
+			return true;
+		} else if ((!Robot.elevatorSub.isGoingDown() && RobotMap.elevatorUpperLimitSwitch.get()
+				&& RobotMap.elevatorUpperCarriageLimitSwitch.get())
+				|| (Robot.elevatorSub.isGoingDown() && RobotMap.elevatorLowerLimitSwitch.get())) {
 			return true;
 		} else {
 			return false;
