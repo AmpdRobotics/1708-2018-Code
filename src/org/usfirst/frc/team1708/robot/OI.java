@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1708.robot;
 
-import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
 import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
 import org.usfirst.frc.team1708.robot.commands.CubeOuttake;
 import org.usfirst.frc.team1708.robot.commands.GoToGroundLevel;
@@ -9,7 +8,6 @@ import org.usfirst.frc.team1708.robot.commands.GoToScaleLowLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleMediumLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToSwitchLevel;
 import org.usfirst.frc.team1708.robot.commands.IntakeCube;
-import org.usfirst.frc.team1708.robot.commands.JoystickDrive;
 import org.usfirst.frc.team1708.robot.commands.ShiftHighGear;
 import org.usfirst.frc.team1708.robot.commands.ShiftLowGear;
 

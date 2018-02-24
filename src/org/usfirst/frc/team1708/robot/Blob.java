@@ -1,6 +1,4 @@
 package org.usfirst.frc.team1708.robot;
-import javax.swing.Icon;
-
 import org.opencv.core.Point;
 
 public class Blob implements Comparable<Blob>{
