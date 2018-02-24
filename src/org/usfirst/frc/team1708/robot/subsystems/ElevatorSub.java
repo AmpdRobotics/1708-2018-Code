@@ -25,8 +25,10 @@ public class ElevatorSub extends Subsystem {
 	private int pidIndex = 0;
 
 	private WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(13);
+	private WPI_TalonSRX elevatorMotor2 = new WPI_TalonSRX(14);
 
 	public ElevatorSub() {
+		elevatorMotor2.set(ControlMode.Follower, 13);
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, timeOutMS, pidIndex);
 
 		elevatorMotor.configNominalOutputForward(0, timeOutMS);
@@ -51,8 +53,10 @@ public class ElevatorSub extends Subsystem {
 		LiveWindow.add(RobotMap.elevatorUpperCarriageLimitSwitch);
 		RobotMap.elevatorUpperLimitSwitch.setName(elevatorStr, "Upper limit switch");
 		LiveWindow.add(RobotMap.elevatorUpperLimitSwitch);
-		elevatorMotor.setName("Elevator", "Motor");
+		elevatorMotor.setName(elevatorStr, "Motor");
 		LiveWindow.add(elevatorMotor);
+		elevatorMotor2.setName(elevatorStr, "follwer motor");
+		LiveWindow.add(elevatorMotor2);
 	}
 
 	public void stopElevator() {
