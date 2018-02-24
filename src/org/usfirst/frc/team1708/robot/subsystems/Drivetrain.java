@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -23,6 +24,18 @@ public class Drivetrain extends Subsystem {
 		RobotMap.leftDriveEncoder.setDistancePerPulse(1);
 		RobotMap.rightDriveEncoder.setDistancePerPulse(1);
 
+		setUpLiveWindow();
+	}
+
+	private void setUpLiveWindow() {
+		String driveStr = "Drive";
+		RobotMap.leftDriveEncoder.setName(driveStr, "Left encoder");
+		LiveWindow.add(RobotMap.leftDriveEncoder);
+		RobotMap.rightDriveEncoder.setName(driveStr, "Right encoder");
+		LiveWindow.add(RobotMap.rightDriveEncoder);
+		RobotMap.driveShifter.setName(driveStr, "Shifter");
+		LiveWindow.add(RobotMap.driveShifter);
+		RobotMap.gyro.setName(driveStr, "Gyro");
 	}
 
 	public void drive(double move, double turn) {
@@ -48,7 +61,7 @@ public class Drivetrain extends Subsystem {
 	public void driveWithGyro(double speed, double angle) {
 		double gyroAngle = getGyroAngle();
 		System.out.println("auto gyro angle" + gyroAngle + ", Desired Angle: " + angle);
-		
+
 		double angular_speed = (angle - gyroAngle) * Kp;
 		double sign = angular_speed < 0 ? -1 : 1;
 		angular_speed = Math.max(Math.abs(angular_speed), .04) * sign;
@@ -63,8 +76,7 @@ public class Drivetrain extends Subsystem {
 
 	public double getGyroAngle() {
 		double gyro_angle = RobotMap.gyro.getAngle();
-		while(gyro_angle < 0)
-		{
+		while (gyro_angle < 0) {
 			gyro_angle += 360;
 		}
 		return gyro_angle;

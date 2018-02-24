@@ -4,16 +4,30 @@ import org.usfirst.frc.team1708.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
  */
 public class ClawSub extends Subsystem {
 
-	private void setRollers(double speed){
+	public ClawSub() {
+		setUpLiveWindow();
+	}
+
+	private void setUpLiveWindow() {
+		String clawStr = "Claw";
+		RobotMap.cubeSensor.setName(clawStr, "Cube sensor");
+		LiveWindow.add(RobotMap.cubeSensor);
+		RobotMap.clawIntakeSolenoid.setName(clawStr, "Intake solenoid");
+		LiveWindow.add(RobotMap.clawIntakeSolenoid);
+		RobotMap.dropClawSolenoid.setName(clawStr, "Drop solenoid");
+	}
+
+	private void setRollers(double speed) {
 		RobotMap.intakeMotor.set(speed);
 	}
-	
+
 	public void intake() {
 		double intakeSpeed = 1;
 		setRollers(intakeSpeed);
@@ -32,7 +46,7 @@ public class ClawSub extends Subsystem {
 	public void clawUp() {
 		RobotMap.dropClawSolenoid.set(DoubleSolenoid.Value.kForward);
 	}
-	
+
 	public void clawDown() {
 		RobotMap.dropClawSolenoid.set(DoubleSolenoid.Value.kReverse);
 	}

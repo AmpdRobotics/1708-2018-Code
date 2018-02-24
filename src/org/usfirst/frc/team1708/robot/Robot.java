@@ -1,20 +1,6 @@
 
 package org.usfirst.frc.team1708.robot;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.vision.VisionThread;
-
-import org.opencv.core.Mat;
-import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team1708.robot.commands.AutoDriveToLine;
 import org.usfirst.frc.team1708.robot.commands.TurnToTheSpecifiedAngle;
 import org.usfirst.frc.team1708.robot.commands.ZeroElevator;
@@ -23,6 +9,12 @@ import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1708.robot.subsystems.ElevatorSub;
 import org.usfirst.frc.team1708.robot.subsystems.RampsSub;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -54,20 +46,9 @@ public class Robot extends IterativeRobot {
 
 		oi = new OI();
 
-		chooser.addObject("My Auto", new AutoDriveToLine());
-
-		SmartDashboard.putData(drivetrain);
-		SmartDashboard.putData(clawSub);
-		SmartDashboard.putData(elevatorSub);
-		SmartDashboard.putData(rampsSub);
-		SmartDashboard.putData(cameraSub);
-
-		SmartDashboard.putData(Scheduler.getInstance());
-		
-		SmartDashboard.putData(new TurnToTheSpecifiedAngle(90));
-		SmartDashboard.putData(new ZeroElevator());
-		
-		SmartDashboard.putData("Drive To line", chooser);
+		setUpSmartDashboardAutonomous();
+		setUpSmartDashboardSubsystems();
+		setUpSmartDashboardCommands();
 	}
 
 	/**
@@ -143,5 +124,26 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	private void setUpSmartDashboardAutonomous() {
+		chooser.addObject("Drive to line", new AutoDriveToLine());
+
+		SmartDashboard.putData("Autonomous", chooser);
+	}
+
+	private void setUpSmartDashboardSubsystems() {
+		SmartDashboard.putData(drivetrain);
+		SmartDashboard.putData(clawSub);
+		SmartDashboard.putData(elevatorSub);
+		SmartDashboard.putData(rampsSub);
+		SmartDashboard.putData(cameraSub);
+	}
+
+	private void setUpSmartDashboardCommands() {
+		SmartDashboard.putData(Scheduler.getInstance());
+
+		SmartDashboard.putData(new TurnToTheSpecifiedAngle(90));
+		SmartDashboard.putData(new ZeroElevator());
 	}
 }
