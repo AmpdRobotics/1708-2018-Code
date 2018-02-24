@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AbstractGoToLevelCommand extends Command {
 
 	protected double setHeightLevelFeet = 0;
+	private double elevatorTolerance = 0.042; // half an inch
 
 	public AbstractGoToLevelCommand() {
 		requires(Robot.elevatorSub);
@@ -20,29 +21,32 @@ public class AbstractGoToLevelCommand extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		System.out.println("starting switch level command");		
+		System.out.println("starting switch level command");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.elevatorSub.setPosition(setHeightLevelFeet);
-		
 
 	}
 
 	// Make this retuSrn true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.elevatorSub.getPositionFeet() == setHeightLevelFeet;
+		if (Math.abs(Robot.elevatorSub.getPositionFeet() - setHeightLevelFeet) <= elevatorTolerance) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.elevatorSub.setVelocity(0);
+		Robot.elevatorSub.stopElevator();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		
+
 	}
 }

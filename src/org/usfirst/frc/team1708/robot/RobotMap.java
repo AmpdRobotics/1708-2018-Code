@@ -1,9 +1,13 @@
 package org.usfirst.frc.team1708.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+import org.usfirst.frc.team1708.robot.commands.ReverseDigitalInput;
+
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -26,20 +30,30 @@ public class RobotMap {
 
 	public static final int ENCODER_TICKS_PER_REVOLUTION = 128;
 
-	// TODO: determine actual values
-	public static final int leftDriveEncoderChannelA = 2;
-	public static final int leftDriveEncoderChannelB = 3;
-	public static final int rightDriveEncoderChannelA = 4;
-	public static final int rightDriveEncoderChannelB = 5;
+	// ANALOG
+
+	// DIO
+	public static final int upperElevatorLimitSwitch = 0;
+	public static final int lowerElevatorLimitSwitch = 1;
+	public static final int upperElevatorCarriageLimitSwitch = 3;
+
+	public static final int cubeSensorPort = 2;
+	public static final int rightDriveEncoderChannelB = 6;
+	public static final int rightDriveEncoderChannelA = 7;
+	public static final int leftDriveEncoderChannelB = 8;
+	public static final int leftDriveEncoderChannelA = 9;
+
+	// Solenoids
+	public static final int rampSolenoidPort = 0;
 	public static final int driveShifterSolenoidReverse = 1;
 	public static final int driveShifterSolenoidForward = 2;
 	public static final int clawIntakeSolenoidForward = 3;
 	public static final int clawIntakeSolenoidReverse = 4;
-	public static final int clawSolenoidForward = 6;
 	public static final int clawSolenoidReverse = 5;
+	public static final int clawSolenoidForward = 6;
 	public static final int elevatorSolenoidPort = 7;
-	public static final int rampSolenoidPort = 0;
 
+	// PWM
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
 	public static SpeedController driveFrontRightMotor = new Spark(1);
 
@@ -56,9 +70,13 @@ public class RobotMap {
 
 	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
 	public static Encoder rightDriveEncoder = new Encoder(rightDriveEncoderChannelA, rightDriveEncoderChannelB);
-	public static AnalogGyro gyro = new AnalogGyro(1);
-	public static DigitalInput elevatorLimitSwitch = new DigitalInput(6);
-	public static DigitalInput cubeSensor = new DigitalInput(7);
+	public static AHRS gyro = new AHRS(SPI.Port.kMXP);
+	public static ReverseDigitalInput elevatorLowerLimitSwitch = new ReverseDigitalInput(lowerElevatorLimitSwitch);
+	public static ReverseDigitalInput elevatorUpperLimitSwitch = new ReverseDigitalInput(upperElevatorLimitSwitch);
+	public static ReverseDigitalInput elevatorUpperCarriageLimitSwitch = new ReverseDigitalInput(
+			upperElevatorCarriageLimitSwitch);
+
+	public static DigitalInput cubeSensor = new DigitalInput(cubeSensorPort);
 
 	public static final int cam0 = 0;
 	// TODO: add camera

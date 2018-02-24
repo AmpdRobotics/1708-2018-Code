@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 public class Drivetrain extends Subsystem {
 
-	double Kp = .15;
+	double Kp = .05;
 	DifferentialDrive robotDrive;
 
 	public Drivetrain() {
@@ -33,7 +33,6 @@ public class Drivetrain extends Subsystem {
 		// robotDrive.arcadeDrive(move.getY(), move.getZ(), true); //competition
 		// bot
 		robotDrive.arcadeDrive(move.getY(), -move.getZ(), true); // practice
-		System.out.println("auto gyro angle" + RobotMap.gyro.getAngle());
 
 	}
 
@@ -47,17 +46,28 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void driveWithGyro(double speed, double angle) {
-		double gyroAngle = RobotMap.gyro.getAngle();
-		System.out.println("auto gyro angle" + gyroAngle);
+		double gyroAngle = getGyroAngle();
+		System.out.println("auto gyro angle" + gyroAngle + ", Desired Angle: " + angle);
+		
+		double angular_speed = (angle - gyroAngle) * Kp;
+		double sign = angular_speed < 0 ? -1 : 1;
+		angular_speed = Math.max(Math.abs(angular_speed), .04) * sign;
+		System.out.println("auto gyro angle" + gyroAngle + ", Desired Angle: " + angle + ", Speed: " + angular_speed);
+
 		if (angle - gyroAngle < 180) {
-			drive(speed, -(angle - gyroAngle) * Kp);
+			drive(speed, -angular_speed);
 		} else {
-			drive(speed, (angle - gyroAngle) * Kp);
+			drive(speed, angular_speed);
 		}
 	}
 
 	public double getGyroAngle() {
-		return RobotMap.gyro.getAngle();
+		double gyro_angle = RobotMap.gyro.getAngle();
+		while(gyro_angle < 0)
+		{
+			gyro_angle += 360;
+		}
+		return gyro_angle;
 	}
 
 	public double getEncoderDistance() {

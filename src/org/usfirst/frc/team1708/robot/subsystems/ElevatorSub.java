@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,12 +18,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ElevatorSub extends Subsystem {
 	private double encoderTicksPerRevolution = 1024;
-	private double revolutionsPerFoot = 10;
+	private double revolutionsPerFoot = 3.3;
 	private double feetToTicks = encoderTicksPerRevolution * revolutionsPerFoot;
 
 	private double zeroPosition = 0;
 	private int timeOutMS = 10;
 	private int pidIndex = 0;
+	
 	
 	private WPI_TalonSRX  elevatorMotor = new WPI_TalonSRX (13);
 
@@ -36,21 +38,36 @@ public class ElevatorSub extends Subsystem {
 	
 		elevatorMotor.configAllowableClosedloopError(0, pidIndex, timeOutMS);
 
-		elevatorMotor.config_kP(pidIndex, 0.1, timeOutMS);
+		elevatorMotor.config_kP(pidIndex, 1, timeOutMS);
 		elevatorMotor.config_kI(pidIndex, 0.0, timeOutMS);
 		elevatorMotor.config_kD(pidIndex, 0.0, timeOutMS);
+	}
+	public void stopElevator(){
+		setVelocity(0);
 	}
 
 	public void setPosition(double height_ft) {
 		double numTicks = feetToTicks * height_ft + zeroPosition;
-		
+		System.out.println("Setting position ticks to: " + numTicks + ", Zero: " + zeroPosition + ", Current: " + getPosition());
+
 		elevatorMotor.set(ControlMode.Position, numTicks);
-		System.out.println("Setting position ticks to: " + numTicks + ", Zero: " + zeroPosition);
 	}
 
 	public void setPostionOI(OI oi) {
-		double slow = 0.7;
-		elevatorMotor.set(ControlMode.PercentOutput, slow* oi.mechanisms.getY());
+		double slow = 0.75;
+		
+		double speed = slow* oi.mechanisms.getY();
+		//elevatorMotor.set(ControlMode.PercentOutput, speed);
+		System.out.println("Speed: " + oi.mechanisms.getY());
+
+		if (Math.abs(oi.mechanisms.getY()) < .1){
+			System.out.println("Speed: " + oi.mechanisms.getY());
+			setVelocity(0);
+		}
+		else
+		{
+			elevatorMotor.set(ControlMode.PercentOutput, speed);
+		}
 	}
 
 	public void setVelocity(double speed_fps) {
@@ -64,7 +81,6 @@ public class ElevatorSub extends Subsystem {
 	}
 
 	public double getPosition() {
-		System.out.println("Sensor position at: " + elevatorMotor.getSelectedSensorPosition(0));
 		return elevatorMotor.getSelectedSensorPosition(0);
 		
 	}
@@ -72,7 +88,12 @@ public class ElevatorSub extends Subsystem {
 	public double getPositionFeet() {
 		return getPosition() / feetToTicks;
 	}
-
+	
+	public double getSpeedFromJoystick(OI oi) {
+		double slow = 0.5;
+		return slow* oi.mechanisms.getY();
+		
+	}
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 

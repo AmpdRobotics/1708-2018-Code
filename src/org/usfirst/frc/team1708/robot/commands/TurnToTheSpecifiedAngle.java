@@ -38,11 +38,7 @@ public class TurnToTheSpecifiedAngle extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Robot.drivetrain.getGyroAngle() % 360 >= angle_deg) {
-			return true;
-		} else {
-			return false;
-		}
+		return (Math.abs(Robot.drivetrain.getGyroAngle() % 360 - angle_deg) < 2);
 	}
 
 	// Called once after isFinished returns true

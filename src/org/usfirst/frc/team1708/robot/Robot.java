@@ -16,6 +16,8 @@ import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team1708.robot.commands.AutoDriveToLine;
+import org.usfirst.frc.team1708.robot.commands.TurnToTheSpecifiedAngle;
+import org.usfirst.frc.team1708.robot.commands.ZeroElevator;
 import org.usfirst.frc.team1708.robot.subsystems.CameraSub;
 import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
@@ -53,13 +55,18 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 
 		chooser.addObject("My Auto", new AutoDriveToLine());
+
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(clawSub);
 		SmartDashboard.putData(elevatorSub);
 		SmartDashboard.putData(rampsSub);
 		SmartDashboard.putData(cameraSub);
-		SmartDashboard.putData(Scheduler.getInstance());
 
+		SmartDashboard.putData(Scheduler.getInstance());
+		
+		SmartDashboard.putData(new TurnToTheSpecifiedAngle(90));
+		SmartDashboard.putData(new ZeroElevator());
+		
 		SmartDashboard.putData("Drive To line", chooser);
 	}
 

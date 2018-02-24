@@ -15,12 +15,9 @@ public class DriveForDistance extends Command {
 	private double feetToTicks = encoderTicksPerRevolution * revolutionsPerFoot;
 	private double distance_ticks;
 	
-	private double desired_angle = 0.0;
-
 	public DriveForDistance(double distance_ft) {
 		distance_ticks = distance_ft * feetToTicks;
 		
-		desired_angle = Robot.drivetrain.getGyroAngle();
 		requires(Robot.drivetrain);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -34,7 +31,7 @@ public class DriveForDistance extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.drivetrain.driveWithGyro(.75, desired_angle);
+		Robot.drivetrain.driveWithGyro(.75, 0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

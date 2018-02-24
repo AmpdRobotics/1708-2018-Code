@@ -22,17 +22,17 @@ public class ZeroElevator extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.elevatorSub.setVelocity(-1);
+		Robot.elevatorSub.setVelocity(-.1);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return RobotMap.elevatorLimitSwitch.get();
+		return RobotMap.elevatorLowerLimitSwitch.get();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.elevatorSub.setVelocity(0);
+		Robot.elevatorSub.stopElevator();
 		Robot.elevatorSub.resetElevatorEncoder();
 		Robot.elevatorSub.setPosition(0);
 	}
@@ -40,6 +40,6 @@ public class ZeroElevator extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.elevatorSub.setVelocity(0);
+		Robot.elevatorSub.stopElevator();
 	}
 }

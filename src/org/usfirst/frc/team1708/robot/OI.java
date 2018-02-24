@@ -2,7 +2,6 @@ package org.usfirst.frc.team1708.robot;
 
 import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
 import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
-import org.usfirst.frc.team1708.robot.commands.CubeDrop;
 import org.usfirst.frc.team1708.robot.commands.CubeOuttake;
 import org.usfirst.frc.team1708.robot.commands.GoToGroundLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleHighLevel;
@@ -59,7 +58,6 @@ public class OI {
 		Button highScaleHeight = new JoystickButton(mechanisms, 3);
 		Button groundLevelHeight = new JoystickButton(mechanisms, 4);
 		Button switchHeight = new JoystickButton(mechanisms, 5);
-		Button cubeDrop = new JoystickButton(mechanisms, 6);
 		Button cubeOuttake = new JoystickButton(mechanisms, 7);
 		Button cubeIntake =new JoystickButton(mechanisms, 8);
 		
@@ -90,7 +88,6 @@ public class OI {
 		shiftHigh.whenPressed(new ShiftHighGear());
 		shiftLow.whenPressed(new ShiftLowGear());
 		centerOnBlob.whileHeld(new CenterOnBlob());
-		cubeDrop.whenPressed(new CubeDrop());
 		cubeOuttake.whenPressed(new CubeOuttake());
 		cubeIntake.whenPressed(new IntakeCube());
 	

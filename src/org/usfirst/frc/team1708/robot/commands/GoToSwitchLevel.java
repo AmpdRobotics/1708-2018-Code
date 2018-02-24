@@ -10,7 +10,7 @@ public class GoToSwitchLevel extends AbstractGoToLevelCommand {
 
 	public GoToSwitchLevel() {
 		requires(Robot.elevatorSub);
-		this.setHeightLevelFeet = 2;
+		this.setHeightLevelFeet = 1;
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}

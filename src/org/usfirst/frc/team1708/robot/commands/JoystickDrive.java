@@ -22,8 +22,6 @@ public class JoystickDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		System.out.println("joystick");
-
 		Robot.drivetrain.joystickDrive(Robot.oi.joystickDrive);              
 	}
 
