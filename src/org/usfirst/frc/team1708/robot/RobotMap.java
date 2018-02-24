@@ -51,7 +51,6 @@ public class RobotMap {
 	public static final int clawIntakeSolenoidReverse = 4;
 	public static final int clawSolenoidReverse = 5;
 	public static final int clawSolenoidForward = 6;
-	public static final int elevatorSolenoidPort = 7;
 
 	// PWM
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
@@ -65,7 +64,6 @@ public class RobotMap {
 	public static DoubleSolenoid clawIntakeSolenoid = new DoubleSolenoid(clawIntakeSolenoidForward,
 			clawIntakeSolenoidReverse);
 	public static DoubleSolenoid dropClawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
-	public static Solenoid elevatorSolenoid = new Solenoid(elevatorSolenoidPort);
 	public static Solenoid rampSolenoid = new Solenoid(rampSolenoidPort);
 
 	public static Encoder leftDriveEncoder = new Encoder(leftDriveEncoderChannelA, leftDriveEncoderChannelB);
