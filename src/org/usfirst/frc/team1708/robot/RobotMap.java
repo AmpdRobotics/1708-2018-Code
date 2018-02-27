@@ -47,8 +47,7 @@ public class RobotMap {
 	public static final int rampSolenoidPort = 0;
 	public static final int driveShifterSolenoidReverse = 1;
 	public static final int driveShifterSolenoidForward = 2;
-	public static final int clawIntakeSolenoidForward = 3;
-	public static final int clawIntakeSolenoidReverse = 4;
+	public static final int clawIntakeSolenoidPort = 3;
 	public static final int clawSolenoidReverse = 5;
 	public static final int clawSolenoidForward = 6;
 
@@ -61,8 +60,7 @@ public class RobotMap {
 
 	public static DoubleSolenoid driveShifter = new DoubleSolenoid(driveShifterSolenoidForward,
 			driveShifterSolenoidReverse);
-	public static DoubleSolenoid clawIntakeSolenoid = new DoubleSolenoid(clawIntakeSolenoidForward,
-			clawIntakeSolenoidReverse);
+	public static Solenoid clawIntakeSolenoid = new Solenoid(clawIntakeSolenoidPort);
 	public static DoubleSolenoid dropClawSolenoid = new DoubleSolenoid(clawSolenoidForward, clawSolenoidReverse);
 	public static Solenoid rampSolenoid = new Solenoid(rampSolenoidPort);
 
