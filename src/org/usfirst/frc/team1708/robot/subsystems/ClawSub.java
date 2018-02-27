@@ -26,6 +26,7 @@ public class ClawSub extends Subsystem {
 
 	private void setRollers(double speed) {
 		RobotMap.intakeMotor.set(speed);
+		RobotMap.intakeMotorB.set(speed);
 	}
 
 	public void intake() {

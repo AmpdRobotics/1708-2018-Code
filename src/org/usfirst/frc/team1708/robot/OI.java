@@ -87,8 +87,8 @@ public class OI {
 		shiftHigh.whenPressed(new ShiftHighGear());
 		shiftLow.whenPressed(new ShiftLowGear());
 		centerOnBlob.whileHeld(new CenterOnBlob());
-		cubeOuttake.whenPressed(new CubeOuttake());
-		cubeIntake.whenPressed(new IntakeCube());
+		cubeOuttake.whileHeld(new CubeOuttake());
+		cubeIntake.whileHeld(new IntakeCube());
 		openClaw.whenPressed(new DropCube());
 	
 

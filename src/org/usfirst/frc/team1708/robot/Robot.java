@@ -49,6 +49,8 @@ public class Robot extends IterativeRobot {
 		setUpSmartDashboardAutonomous();
 		setUpSmartDashboardSubsystems();
 		setUpSmartDashboardCommands();
+		
+		Scheduler.getInstance().add(new ZeroElevator());
 	}
 
 	/**
