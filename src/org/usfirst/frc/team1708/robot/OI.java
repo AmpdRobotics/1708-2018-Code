@@ -2,6 +2,7 @@ package org.usfirst.frc.team1708.robot;
 
 import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
 import org.usfirst.frc.team1708.robot.commands.CubeOuttake;
+import org.usfirst.frc.team1708.robot.commands.DropCube;
 import org.usfirst.frc.team1708.robot.commands.GoToGroundLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleHighLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleLowLevel;
@@ -58,7 +59,7 @@ public class OI {
 		Button switchHeight = new JoystickButton(mechanisms, 5);
 		Button cubeOuttake = new JoystickButton(mechanisms, 7);
 		Button cubeIntake =new JoystickButton(mechanisms, 8);
-		
+		Button openClaw = new JoystickButton(mechanisms, 9);
 		
 		//// TRIGGERING COMMANDS WITH BUTTONS
 		// Once you have a button, it's trivial to bind it to a button in one of
@@ -88,6 +89,7 @@ public class OI {
 		centerOnBlob.whileHeld(new CenterOnBlob());
 		cubeOuttake.whenPressed(new CubeOuttake());
 		cubeIntake.whenPressed(new IntakeCube());
+		openClaw.whenPressed(new DropCube());
 	
 
 	}
