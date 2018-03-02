@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DropClaw extends Command {
+public class CloseClaw extends Command {
 
-    public DropClaw() {
+    public CloseClaw() {
     	requires(Robot.clawSub);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,12 +21,12 @@ public class DropClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.clawSub.clawDown();
+    	Robot.clawSub.closeClaw();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -18,11 +18,13 @@ public class ZeroElevator extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("elevator zeroed");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.elevatorSub.setVelocity(-.1);
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1708.robot;
 
 import org.usfirst.frc.team1708.robot.commands.AutoDriveToLine;
+import org.usfirst.frc.team1708.robot.commands.AutoScoreSwitch;
 import org.usfirst.frc.team1708.robot.commands.TurnToTheSpecifiedAngle;
 import org.usfirst.frc.team1708.robot.commands.ZeroElevator;
 import org.usfirst.frc.team1708.robot.subsystems.CameraSub;
@@ -49,8 +50,7 @@ public class Robot extends IterativeRobot {
 		setUpSmartDashboardAutonomous();
 		setUpSmartDashboardSubsystems();
 		setUpSmartDashboardCommands();
-		
-		Scheduler.getInstance().add(new ZeroElevator());
+
 	}
 
 	/**
@@ -82,13 +82,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+		Scheduler.getInstance().add(new ZeroElevator());
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
@@ -111,6 +105,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		Scheduler.getInstance().add(new ZeroElevator());
+
 	}
 
 	/**
@@ -129,7 +125,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	private void setUpSmartDashboardAutonomous() {
-		chooser.addObject("Drive to line", new AutoDriveToLine());
+		chooser.addDefault("Drive to line", new AutoDriveToLine());
+		chooser.addObject("Switch Auto", new AutoScoreSwitch(null, null));
 
 		SmartDashboard.putData("Autonomous", chooser);
 	}

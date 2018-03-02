@@ -5,6 +5,7 @@ import org.usfirst.frc.team1708.robot.commands.JoystickDrive;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -88,9 +89,9 @@ public class Drivetrain extends Subsystem {
 
 	public void setDriveShifter(boolean isHigh) {
 		if (isHigh) {
-			RobotMap.driveShifter.set(DoubleSolenoid.Value.kReverse);
+			RobotMap.driveShifter.set(true);
 		} else {
-			RobotMap.driveShifter.set(DoubleSolenoid.Value.kForward);
+			RobotMap.driveShifter.set(false);
 		}
 
 	}

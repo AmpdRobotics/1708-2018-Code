@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1708.robot;
 
 import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
+import org.usfirst.frc.team1708.robot.commands.CloseClaw;
 import org.usfirst.frc.team1708.robot.commands.CubeOuttake;
 import org.usfirst.frc.team1708.robot.commands.DropCube;
 import org.usfirst.frc.team1708.robot.commands.GoToGroundLevel;
@@ -32,7 +33,7 @@ public class OI {
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
-	
+
 	public static final int CONTROLLER_A_BUTTON = 2;
 	public static final int CONTROLLER_B_BUTTON = 3;
 	public static final int CONTROLLER_X_BUTTON = 1;
@@ -42,25 +43,25 @@ public class OI {
 	public static final int CONTROLLER_LEFT_BUMPER = 5;
 	public static final int CONTROLLER_RIGHT_BUMPER = 6;
 
-
 	public Joystick joystickDrive = new Joystick(0);
 	public Joystick mechanisms = new Joystick(1);
 
 	public OI() {
 		Button shiftHigh = new JoystickButton(joystickDrive, CONTROLLER_B_BUTTON);
 		Button shiftLow = new JoystickButton(joystickDrive, CONTROLLER_Y_BUTTON);
-		
+
 		Button centerOnBlob = new JoystickButton(joystickDrive, 2);
-		
+
 		Button lowScaleHeight = new JoystickButton(mechanisms, 1);
 		Button mediumScaleHeight = new JoystickButton(mechanisms, 2);
 		Button highScaleHeight = new JoystickButton(mechanisms, 3);
 		Button groundLevelHeight = new JoystickButton(mechanisms, 4);
 		Button switchHeight = new JoystickButton(mechanisms, 5);
-		Button cubeOuttake = new JoystickButton(mechanisms, 7);
-		Button cubeIntake =new JoystickButton(mechanisms, 8);
+		Button cubeOuttake = new JoystickButton(mechanisms, 8);
+		Button cubeIntake = new JoystickButton(mechanisms, 7);
 		Button openClaw = new JoystickButton(mechanisms, 9);
-		
+		Button closeClaw = new JoystickButton(mechanisms, 10);
+
 		//// TRIGGERING COMMANDS WITH BUTTONS
 		// Once you have a button, it's trivial to bind it to a button in one of
 		// three ways:
@@ -90,7 +91,7 @@ public class OI {
 		cubeOuttake.whileHeld(new CubeOuttake());
 		cubeIntake.whileHeld(new IntakeCube());
 		openClaw.whenPressed(new DropCube());
-	
+		closeClaw.whenPressed(new CloseClaw());
 
 	}
 }
