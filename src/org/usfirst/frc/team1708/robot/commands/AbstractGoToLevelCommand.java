@@ -33,11 +33,21 @@ public class AbstractGoToLevelCommand extends Command {
 
 	// Make this retuSrn true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
+		System.out.println("Current: " + Robot.elevatorSub.getPositionFeet() + ", Desired: " + setHeightLevelFeet);
+		
 		if (Math.abs(Robot.elevatorSub.getPositionFeet() - setHeightLevelFeet) <= elevatorTolerance) {
+			System.out.println("reached desired position. current position: " + Robot.elevatorSub.getPositionFeet()
+					+ " desired position" + setHeightLevelFeet);
 			return true;
-		} else if ((!Robot.elevatorSub.isGoingDown() && RobotMap.elevatorUpperLimitSwitch.get()
+		} 
+		else if (!Robot.elevatorSub.isGoingDown() && RobotMap.elevatorUpperLimitSwitch.get()
 				&& RobotMap.elevatorUpperCarriageLimitSwitch.get())
-				|| (Robot.elevatorSub.isGoingDown() && RobotMap.elevatorLowerLimitSwitch.get())) {
+		{
+			System.out.println("hit a upper button");
+			return true;
+		}
+		else if(Robot.elevatorSub.isGoingDown() && RobotMap.elevatorLowerLimitSwitch.get()) {
+			System.out.println("hit lower button");
 			return true;
 		} else {
 			return false;
