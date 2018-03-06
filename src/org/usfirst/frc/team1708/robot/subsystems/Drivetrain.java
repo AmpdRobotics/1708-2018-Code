@@ -69,18 +69,14 @@ public class Drivetrain extends Subsystem {
 		System.out.println("auto gyro angle" + gyroAngle + ", Desired Angle: " + angle + ", Speed: " + angular_speed);
 
 		if (angle - gyroAngle < 180) {
-			drive(speed, -angular_speed);
-		} else {
-			drive(speed, angular_speed);
+			angular_speed = -angular_speed;
 		}
+		drive(speed, angular_speed);
+
 	}
 
 	public double getGyroAngle() {
-		double gyro_angle = RobotMap.gyro.getAngle();
-		while (gyro_angle < 0) {
-			gyro_angle += 360;
-		}
-		return gyro_angle;
+		return RobotMap.gyro.getAngle();
 	}
 
 	public double getEncoderDistance() {

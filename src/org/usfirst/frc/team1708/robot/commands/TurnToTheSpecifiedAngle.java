@@ -12,14 +12,7 @@ public class TurnToTheSpecifiedAngle extends Command {
 	private double angle_deg;
 
 	public TurnToTheSpecifiedAngle(double angle_deg) {
-		if (angle_deg < 0){
-			this.angle_deg = 360 + angle_deg;
-		}
-		else
-		{
-			this.angle_deg = angle_deg;
-		}
-		
+		this.angle_deg = angle_deg;		
 		requires(Robot.drivetrain);
 
 		// Use requires() here to declare subsystem dependencies
