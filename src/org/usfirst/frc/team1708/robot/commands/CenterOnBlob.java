@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class CenterOnBlob extends Command {
-
+	private int error_pixels;
+	private static final int ERROR_THRESHOLD_PIXELS = 5;
+	
     public CenterOnBlob() {
     	requires(Robot.cameraSub);
     	requires(Robot.drivetrain);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	this.error_pixels = Integer.MAX_VALUE;
     }
 
     // Called just before this Command runs the first time
@@ -32,7 +35,9 @@ public class CenterOnBlob extends Command {
     	}
     	else {
     		System.out.println("Found blob at " + biggestBlob.getCenter());
-    		double speed = (cameraCenter - biggestBlob.getCenter().x)/(cameraCenter * 2);
+    		this.error_pixels = (int)(cameraCenter - biggestBlob.getCenter().x);
+    		
+    		double speed = (this.error_pixels)/(cameraCenter * 2);
     		Robot.drivetrain.drive(0, speed);
     		System.out.println("Setting Speed Vision" + speed);
     	}
@@ -41,7 +46,7 @@ public class CenterOnBlob extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Math.abs(this.error_pixels) < ERROR_THRESHOLD_PIXELS;
     }
 
     // Called once after isFinished returns true
