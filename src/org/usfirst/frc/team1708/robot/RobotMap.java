@@ -38,10 +38,10 @@ public class RobotMap {
 	public static final int upperElevatorCarriageLimitSwitch = 3;
 
 	public static final int cubeSensorPort = 2;
-	public static final int rightDriveEncoderChannelB = 6;
-	public static final int rightDriveEncoderChannelA = 7;
-	public static final int leftDriveEncoderChannelB = 8;
-	public static final int leftDriveEncoderChannelA = 9;
+	public static final int rightDriveEncoderChannelB = 8;
+	public static final int rightDriveEncoderChannelA = 9;
+	public static final int leftDriveEncoderChannelB = 4;
+	public static final int leftDriveEncoderChannelA = 5;
 
 	// Solenoids
 	public static final int rampSolenoidPort = 0;

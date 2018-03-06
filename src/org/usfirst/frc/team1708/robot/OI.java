@@ -57,8 +57,8 @@ public class OI {
 		Button highScaleHeight = new JoystickButton(mechanisms, 3);
 		Button groundLevelHeight = new JoystickButton(mechanisms, 4);
 		Button switchHeight = new JoystickButton(mechanisms, 5);
-		Button cubeOuttake = new JoystickButton(mechanisms, 8);
 		Button cubeIntake = new JoystickButton(mechanisms, 7);
+		Button cubeOuttake = new JoystickButton(mechanisms, 8);
 		Button openClaw = new JoystickButton(mechanisms, 9);
 		Button closeClaw = new JoystickButton(mechanisms, 10);
 

@@ -66,21 +66,14 @@ public class ElevatorSub extends Subsystem {
 
 	public void setPosition(double height_ft) {
 		double numTicks = feetToTicks * height_ft + zeroPosition;
-		System.out.println(
-				"Setting position ticks to: " + numTicks + ", Zero: " + zeroPosition + ", Current: " + getPosition());
 
 		elevatorMotor.set(ControlMode.Position, numTicks);
 	}
 
-	public void setPostionOI(OI oi) {
-		double slow = 0.75;
-
-		double speed = slow * oi.mechanisms.getY();
-		// elevatorMotor.set(ControlMode.PercentOutput, speed);
-		System.out.println("Speed: " + oi.mechanisms.getY());
+	public void setVelocityOI(OI oi) {
+		double speed = getSpeedFromJoystick(oi);
 
 		if (Math.abs(oi.mechanisms.getY()) < .1) {
-			System.out.println("Speed: " + oi.mechanisms.getY());
 			setVelocity(0);
 		} else {
 			elevatorMotor.set(ControlMode.PercentOutput, speed);
@@ -94,7 +87,6 @@ public class ElevatorSub extends Subsystem {
 
 	public void resetElevatorEncoder() {
 		zeroPosition = getPosition();
-		System.out.println("Setting Zero:" + zeroPosition);
 	}
 
 	public double getPosition() {
@@ -124,8 +116,7 @@ public class ElevatorSub extends Subsystem {
 	// here. Call these from Commands.
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new CalibrateElevator());
-		
+		//setDefaultCommand(new CalibrateElevator());
 
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
