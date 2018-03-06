@@ -20,7 +20,6 @@ public class ElevatorSub extends Subsystem {
 	private double revolutionsPerFoot = 3.3;
 	private double feetToTicks = encoderTicksPerRevolution * revolutionsPerFoot;
 
-	private double zeroPosition = 0;
 	private int timeOutMS = 10;
 	private int pidIndex = 0;
 
@@ -42,7 +41,7 @@ public class ElevatorSub extends Subsystem {
 		elevatorMotor.config_kP(pidIndex, 1, timeOutMS);
 		elevatorMotor.config_kI(pidIndex, 0.0, timeOutMS);
 		elevatorMotor.config_kD(pidIndex, 0.0, timeOutMS);
-
+		resetElevatorEncoder();
 		setUpLiveWindow();
 	}
 
@@ -65,7 +64,7 @@ public class ElevatorSub extends Subsystem {
 	}
 
 	public void setPosition(double height_ft) {
-		double numTicks = feetToTicks * height_ft + zeroPosition;
+		double numTicks = feetToTicks * height_ft;
 
 		elevatorMotor.set(ControlMode.Position, numTicks);
 	}
@@ -86,7 +85,7 @@ public class ElevatorSub extends Subsystem {
 	}
 
 	public void resetElevatorEncoder() {
-		zeroPosition = getPosition();
+		elevatorMotor.setSelectedSensorPosition(0, pidIndex, timeOutMS);
 	}
 
 	public double getPosition() {
