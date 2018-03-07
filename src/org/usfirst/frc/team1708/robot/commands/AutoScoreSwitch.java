@@ -24,12 +24,10 @@ public class AutoScoreSwitch extends CommandGroup {
 		// If we are on the same side as the switch, drive half
 		if (switch_position != robot_position) {			
 			// Turn to face the direction of the switch
-			if (switch_position == FieldPosition.left) {
-				addSequential(new TurnToTheSpecifiedAngle(90));
-			} else if (switch_position == FieldPosition.right) {
-				addSequential(new TurnToTheSpecifiedAngle(-90));
-			}
-								
+			
+			double turn_angle = (switch_position == FieldPosition.left) ? -90 : 90;
+			addSequential(new TurnToTheSpecifiedAngle(turn_angle));
+			
 			// Drive to the switch side of the field
 			if (robot_position == FieldPosition.center) {
 				addSequential(new DriveForDistance(centerToSideDistance));
@@ -39,7 +37,7 @@ public class AutoScoreSwitch extends CommandGroup {
 			}
 			
 			// Turn to face the switch
-			addSequential(new TurnToTheSpecifiedAngle(0));
+			addSequential(new TurnToTheSpecifiedAngle(-turn_angle));
 		}
 		
 		// Center on the switch
