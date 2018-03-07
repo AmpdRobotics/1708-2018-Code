@@ -10,7 +10,7 @@ public class GoToGroundLevel extends AbstractGoToLevelCommand {
 
 	public GoToGroundLevel() {
 		requires(Robot.elevatorSub);
-		this.setHeightLevelFeet = 0;
+		this.setHeightLevelFeet = GROUND_HEIGHT_FEET;
 
 	}
 	

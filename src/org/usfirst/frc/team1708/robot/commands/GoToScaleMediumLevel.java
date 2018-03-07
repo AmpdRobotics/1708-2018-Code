@@ -9,7 +9,7 @@ public class GoToScaleMediumLevel extends AbstractGoToLevelCommand {
 
 	public GoToScaleMediumLevel() {
 		requires(Robot.elevatorSub);
-		this.setHeightLevelFeet = 5;
+		this.setHeightLevelFeet = SCALE_MED_HEIGHT_FEET;
 
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);}

@@ -9,6 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AbstractGoToLevelCommand extends Command {
+	
+	public final double GROUND_HEIGHT_FEET = 0;
+	public final double SWITCH_HEIGHT_FEET = 2;
+	public final double SCALE_LOW_HEIGHT_FEET = 3;
+	public final double SCALE_MED_HEIGHT_FEET = 4;
+	public final double SCALE_HIGH_HEIGHT_FEET = 5;
 
 	protected double setHeightLevelFeet = 0;
 	private double elevatorTolerance = 0.042; // half an inch
