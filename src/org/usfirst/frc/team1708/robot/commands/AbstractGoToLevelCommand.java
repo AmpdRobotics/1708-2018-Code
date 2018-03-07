@@ -19,6 +19,7 @@ public class AbstractGoToLevelCommand extends Command {
 	protected double setHeightLevelFeet = 0;
 	private double elevatorTolerance = 0.042; // half an inch
 
+	private boolean stoppedFromLimitSwitch = false;
 	public AbstractGoToLevelCommand() {
 		requires(Robot.elevatorSub);
 
@@ -29,6 +30,7 @@ public class AbstractGoToLevelCommand extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		System.out.println("starting switch level command");
+		stoppedFromLimitSwitch = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -50,10 +52,12 @@ public class AbstractGoToLevelCommand extends Command {
 				&& RobotMap.elevatorUpperCarriageLimitSwitch.get())
 		{
 			System.out.println("hit a upper button");
+			stoppedFromLimitSwitch = true;
 			return true;
 		}
 		else if(Robot.elevatorSub.isGoingDown() && RobotMap.elevatorLowerLimitSwitch.get()) {
 			System.out.println("hit lower button");
+			stoppedFromLimitSwitch = true;
 			return true;
 		} else {
 			return false;
@@ -62,7 +66,11 @@ public class AbstractGoToLevelCommand extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.elevatorSub.stopElevator();
+		if(stoppedFromLimitSwitch)
+		{
+			Robot.elevatorSub.stopElevator();
+		}
+			
 	}
 
 	// Called when another command which requires one or more of the same
