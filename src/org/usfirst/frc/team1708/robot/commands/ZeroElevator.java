@@ -22,7 +22,7 @@ public class ZeroElevator extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.elevatorSub.setVelocity(-.1);
+		Robot.elevatorSub.setVelocity(-.3);
 		
 	}
 

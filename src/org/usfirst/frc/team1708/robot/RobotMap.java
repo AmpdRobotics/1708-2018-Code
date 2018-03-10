@@ -5,7 +5,6 @@ import org.usfirst.frc.team1708.robot.commands.ReverseDigitalInput;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -38,10 +37,10 @@ public class RobotMap {
 	public static final int upperElevatorCarriageLimitSwitch = 3;
 
 	public static final int cubeSensorPort = 2;
-	public static final int rightDriveEncoderChannelB = 8;
-	public static final int rightDriveEncoderChannelA = 9;
-	public static final int leftDriveEncoderChannelB = 4;
-	public static final int leftDriveEncoderChannelA = 5;
+	public static final int rightDriveEncoderChannelB = 9;
+	public static final int rightDriveEncoderChannelA = 8;
+	public static final int leftDriveEncoderChannelB = 7;
+	public static final int leftDriveEncoderChannelA = 6;
 
 	// Solenoids
 	public static final int rampSolenoidPort = 0;
@@ -67,7 +66,7 @@ public class RobotMap {
 	public static ReverseDigitalInput elevatorUpperCarriageLimitSwitch = new ReverseDigitalInput(
 			upperElevatorCarriageLimitSwitch);
 
-	public static DigitalInput cubeSensor = new DigitalInput(cubeSensorPort);
+	public static ReverseDigitalInput cubeSensor = new ReverseDigitalInput(cubeSensorPort);
 
 	public static final int cam0 = 0;
 	// TODO: add camera

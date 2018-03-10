@@ -4,14 +4,16 @@ import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
 import org.usfirst.frc.team1708.robot.commands.CloseClaw;
 import org.usfirst.frc.team1708.robot.commands.CubeOuttake;
 import org.usfirst.frc.team1708.robot.commands.DropCube;
-import org.usfirst.frc.team1708.robot.commands.GoToGroundLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleHighLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleLowLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleMediumLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToSwitchLevel;
+import org.usfirst.frc.team1708.robot.commands.IntakeAndClose;
 import org.usfirst.frc.team1708.robot.commands.IntakeCube;
+import org.usfirst.frc.team1708.robot.commands.ManualIntake;
 import org.usfirst.frc.team1708.robot.commands.ShiftHighGear;
 import org.usfirst.frc.team1708.robot.commands.ShiftLowGear;
+import org.usfirst.frc.team1708.robot.commands.ZeroElevator;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -49,14 +51,17 @@ public class OI {
 	public OI() {
 		Button shiftHigh = new JoystickButton(joystickDrive, CONTROLLER_B_BUTTON);
 		Button shiftLow = new JoystickButton(joystickDrive, CONTROLLER_Y_BUTTON);
+		
 
 		Button centerOnBlob = new JoystickButton(joystickDrive, 2);
 
 		Button lowScaleHeight = new JoystickButton(mechanisms, 1);
 		Button mediumScaleHeight = new JoystickButton(mechanisms, 2);
 		Button highScaleHeight = new JoystickButton(mechanisms, 3);
-		Button groundLevelHeight = new JoystickButton(mechanisms, 4);
+		Button intakeManual = new JoystickButton(mechanisms, 4);
 		Button switchHeight = new JoystickButton(mechanisms, 5);
+		Button zeroElevator = new JoystickButton(mechanisms, 6);
+
 		Button cubeIntake = new JoystickButton(mechanisms, 7);
 		Button cubeOuttake = new JoystickButton(mechanisms, 8);
 		Button openClaw = new JoystickButton(mechanisms, 9);
@@ -84,14 +89,17 @@ public class OI {
 		highScaleHeight.whenPressed(new GoToScaleHighLevel());
 		lowScaleHeight.whenPressed(new GoToScaleLowLevel());
 		mediumScaleHeight.whenPressed(new GoToScaleMediumLevel());
-		groundLevelHeight.whenPressed(new GoToGroundLevel());
+		//groundLevelHeight.whenPressed(new GoToGroundLevel());
+		zeroElevator.whenPressed(new ZeroElevator());
+
 		shiftHigh.whenPressed(new ShiftHighGear());
 		shiftLow.whenPressed(new ShiftLowGear());
 		centerOnBlob.whileHeld(new CenterOnBlob());
 		cubeOuttake.whileHeld(new CubeOuttake());
-		cubeIntake.whileHeld(new IntakeCube());
+		cubeIntake.whenPressed(new IntakeAndClose());
 		openClaw.whenPressed(new DropCube());
 		closeClaw.whenPressed(new CloseClaw());
+		intakeManual.whileHeld(new ManualIntake());
 
 	}
 }

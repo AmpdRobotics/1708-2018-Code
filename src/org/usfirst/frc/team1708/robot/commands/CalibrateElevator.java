@@ -24,10 +24,9 @@ public class CalibrateElevator extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.elevatorSub.setPostionOI(Robot.oi);
-		Robot.elevatorSub.getPosition();
+//		Robot.elevatorSub.setPostionOI(Robot.oi);
+//		Robot.elevatorSub.getPosition();
 		percentage = Robot.elevatorSub.getSpeedFromJoystick(Robot.oi);
-		System.out.println(Robot.elevatorSub.getPosition() + "elevator encoder position");
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

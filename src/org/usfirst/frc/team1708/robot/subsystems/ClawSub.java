@@ -2,7 +2,8 @@ package org.usfirst.frc.team1708.robot.subsystems;
 
 import org.usfirst.frc.team1708.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.SendableBase;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -21,6 +22,10 @@ public class ClawSub extends Subsystem {
 		LiveWindow.add(RobotMap.cubeSensor);
 		RobotMap.clawIntakeSolenoid.setName(clawStr, "Intake solenoid");
 		LiveWindow.add(RobotMap.clawIntakeSolenoid);
+		((Sendable) RobotMap.intakeMotor).setName(clawStr, "Right intake");
+		LiveWindow.add((Sendable) RobotMap.intakeMotor);
+		((Sendable) RobotMap.intakeMotorB).setName(clawStr, "Left intake");
+		LiveWindow.add((Sendable) RobotMap.intakeMotorB);
 	}
 
 	private void setRollers(double speed) {
@@ -33,9 +38,8 @@ public class ClawSub extends Subsystem {
 		setRollers(intakeSpeed);
 	}
 
-	public void outtake() {
-		double outtakeSpeed = 1;
-		setRollers(outtakeSpeed);
+	public void outtake(double speed) {
+		setRollers(speed);
 	}
 
 	public void intakeOff() {
@@ -43,13 +47,12 @@ public class ClawSub extends Subsystem {
 		setRollers(intakeOffSpeed);
 	}
 
-	
 	public void openClaw() {
-		RobotMap.clawIntakeSolenoid.set(true);	
-		}
-	
-	public void closeClaw() {
 		RobotMap.clawIntakeSolenoid.set(false);
+	}
+
+	public void closeClaw() {
+		RobotMap.clawIntakeSolenoid.set(true);
 	}
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.

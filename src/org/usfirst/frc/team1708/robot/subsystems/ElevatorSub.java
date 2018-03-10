@@ -2,7 +2,6 @@ package org.usfirst.frc.team1708.robot.subsystems;
 
 import org.usfirst.frc.team1708.robot.OI;
 import org.usfirst.frc.team1708.robot.RobotMap;
-import org.usfirst.frc.team1708.robot.commands.CalibrateElevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -38,9 +37,10 @@ public class ElevatorSub extends Subsystem {
 
 		elevatorMotor.configAllowableClosedloopError(0, pidIndex, timeOutMS);
 
-		elevatorMotor.config_kP(pidIndex, 1, timeOutMS);
+		elevatorMotor.config_kP(pidIndex, .5, timeOutMS);
 		elevatorMotor.config_kI(pidIndex, 0.0, timeOutMS);
 		elevatorMotor.config_kD(pidIndex, 0.0, timeOutMS);
+		
 		resetElevatorEncoder();
 		setUpLiveWindow();
 	}
@@ -49,12 +49,16 @@ public class ElevatorSub extends Subsystem {
 		String elevatorStr = "Elevator";
 		RobotMap.elevatorLowerLimitSwitch.setName(elevatorStr, "Lower limit switch");
 		LiveWindow.add(RobotMap.elevatorLowerLimitSwitch);
+		
 		RobotMap.elevatorUpperCarriageLimitSwitch.setName(elevatorStr, "Upper carriage limit switch");
 		LiveWindow.add(RobotMap.elevatorUpperCarriageLimitSwitch);
+		
 		RobotMap.elevatorUpperLimitSwitch.setName(elevatorStr, "Upper limit switch");
 		LiveWindow.add(RobotMap.elevatorUpperLimitSwitch);
+		
 		elevatorMotor.setName(elevatorStr, "Motor");
 		LiveWindow.add(elevatorMotor);
+		
 		elevatorMotor2.setName(elevatorStr, "follwer motor");
 		LiveWindow.add(elevatorMotor2);
 	}
@@ -65,7 +69,6 @@ public class ElevatorSub extends Subsystem {
 
 	public void setPosition(double height_ft) {
 		double numTicks = feetToTicks * height_ft;
-
 		elevatorMotor.set(ControlMode.Position, numTicks);
 	}
 
@@ -73,7 +76,7 @@ public class ElevatorSub extends Subsystem {
 		double speed = getSpeedFromJoystick(oi);
 
 		if (Math.abs(oi.mechanisms.getY()) < .1) {
-			setVelocity(0);
+			stopElevator();
 		} else {
 			elevatorMotor.set(ControlMode.PercentOutput, speed);
 		}
@@ -90,7 +93,6 @@ public class ElevatorSub extends Subsystem {
 
 	public double getPosition() {
 		return elevatorMotor.getSelectedSensorPosition(0);
-
 	}
 
 	public double getPositionFeet() {
@@ -100,7 +102,6 @@ public class ElevatorSub extends Subsystem {
 	public double getSpeedFromJoystick(OI oi) {
 		double slow = 0.5;
 		return slow * oi.mechanisms.getY();
-
 	}
 
 	public boolean isGoingDown() {

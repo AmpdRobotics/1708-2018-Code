@@ -18,7 +18,7 @@ public class IntakeCube extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-
+		Robot.clawSub.openClaw();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -28,13 +28,9 @@ public class IntakeCube extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
-		/*
-		 * if (RobotMap.cubeSensor.get()) { return true; } else { return false;
-		 * 
-		 * }
-		 */
+		return RobotMap.cubeSensor.get();
 	}
+	
 
 	// Called once after isFinished returns true
 	protected void end() {

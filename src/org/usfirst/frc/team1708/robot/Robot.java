@@ -3,6 +3,12 @@ package org.usfirst.frc.team1708.robot;
 
 import org.usfirst.frc.team1708.robot.commands.AutoDriveToLine;
 import org.usfirst.frc.team1708.robot.commands.AutoScoreSwitch;
+import org.usfirst.frc.team1708.robot.commands.AutoScoreSwitch.FieldPosition;
+import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
+import org.usfirst.frc.team1708.robot.commands.GoToScaleHighLevel;
+import org.usfirst.frc.team1708.robot.commands.GoToScaleLowLevel;
+import org.usfirst.frc.team1708.robot.commands.GoToScaleMediumLevel;
+import org.usfirst.frc.team1708.robot.commands.GoToSwitchLevel;
 import org.usfirst.frc.team1708.robot.commands.TurnToTheSpecifiedAngle;
 import org.usfirst.frc.team1708.robot.commands.ZeroElevator;
 import org.usfirst.frc.team1708.robot.subsystems.CameraSub;
@@ -36,7 +42,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -81,7 +87,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = autonomousChooser.getSelected();
 		Scheduler.getInstance().add(new ZeroElevator());
 
 		// schedule the autonomous command (example)
@@ -125,10 +131,13 @@ public class Robot extends IterativeRobot {
 	}
 
 	private void setUpSmartDashboardAutonomous() {
-		chooser.addDefault("Drive to line", new AutoDriveToLine());
-		chooser.addObject("Switch Auto", new AutoScoreSwitch(null, null));
+		autonomousChooser.addDefault("Drive to line", new AutoDriveToLine());
+		autonomousChooser.addObject("Left Switch Auto", new AutoScoreSwitch(FieldPosition.left));
+		autonomousChooser.addObject("Center Switch Auto", new AutoScoreSwitch(FieldPosition.center));
+		autonomousChooser.addObject("Right Switch Auto", new AutoScoreSwitch(FieldPosition.right));
 
-		SmartDashboard.putData("Autonomous", chooser);
+		SmartDashboard.putData("Autonomous", autonomousChooser);
+
 	}
 
 	private void setUpSmartDashboardSubsystems() {
@@ -142,7 +151,15 @@ public class Robot extends IterativeRobot {
 	private void setUpSmartDashboardCommands() {
 		SmartDashboard.putData(Scheduler.getInstance());
 
-		SmartDashboard.putData(new TurnToTheSpecifiedAngle(90));
+		SmartDashboard.putData("Turn Right", new TurnToTheSpecifiedAngle(90));
+		SmartDashboard.putData("Turn Left", new TurnToTheSpecifiedAngle(-90));
+		SmartDashboard.putData("Elevator Switch", new GoToSwitchLevel());
+		SmartDashboard.putData("Elevator Low", new GoToScaleLowLevel());
+		SmartDashboard.putData("Elevator Med", new GoToScaleMediumLevel());
+		SmartDashboard.putData("Elevator High", new GoToScaleHighLevel());
+		SmartDashboard.putData("Elevator Ground", new ZeroElevator());
+		SmartDashboard.putData("Center on Blob", new CenterOnBlob());
+
 		SmartDashboard.putData(new ZeroElevator());
 	}
 }
