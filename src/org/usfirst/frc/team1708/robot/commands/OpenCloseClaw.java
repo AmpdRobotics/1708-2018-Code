@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class EnableDeployRamps extends Command {
+public class OpenCloseClaw extends Command {
 
-    public EnableDeployRamps() {
-    	
+    public OpenCloseClaw() {
+    	requires(Robot.clawSub);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,16 +21,17 @@ public class EnableDeployRamps extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.isEndGame = true;
+    	Robot.clawSub.openClaw();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.clawSub.closeClaw();
     }
 
     // Called when another command which requires one or more of the same

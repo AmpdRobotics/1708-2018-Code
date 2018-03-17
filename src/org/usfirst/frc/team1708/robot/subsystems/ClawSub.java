@@ -34,7 +34,7 @@ public class ClawSub extends Subsystem {
 	}
 
 	public void intake() {
-		double intakeSpeed = -1;
+		double intakeSpeed = 1;
 		setRollers(intakeSpeed);
 	}
 
@@ -48,11 +48,11 @@ public class ClawSub extends Subsystem {
 	}
 
 	public void openClaw() {
-		RobotMap.clawIntakeSolenoid.set(false);
+		RobotMap.clawIntakeSolenoid.set(true);
 	}
 
 	public void closeClaw() {
-		RobotMap.clawIntakeSolenoid.set(true);
+		RobotMap.clawIntakeSolenoid.set(false);
 	}
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.

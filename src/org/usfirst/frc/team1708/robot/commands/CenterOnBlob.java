@@ -13,7 +13,7 @@ public class CenterOnBlob extends Command {
 	private int error_pixels;
 	private static final int ERROR_THRESHOLD_PIXELS = 5;
 
-	private static final double kP = 1.1;
+	private static final double kP = .8;
 
 	public CenterOnBlob() {
 		requires(Robot.cameraSub);

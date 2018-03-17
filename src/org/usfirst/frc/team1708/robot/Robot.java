@@ -5,6 +5,7 @@ import org.usfirst.frc.team1708.robot.commands.AutoDriveToLine;
 import org.usfirst.frc.team1708.robot.commands.AutoScoreSwitch;
 import org.usfirst.frc.team1708.robot.commands.AutoScoreSwitch.FieldPosition;
 import org.usfirst.frc.team1708.robot.commands.CenterOnBlob;
+import org.usfirst.frc.team1708.robot.commands.EnableRampRelease;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleHighLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleLowLevel;
 import org.usfirst.frc.team1708.robot.commands.GoToScaleMediumLevel;
@@ -15,8 +16,10 @@ import org.usfirst.frc.team1708.robot.subsystems.CameraSub;
 import org.usfirst.frc.team1708.robot.subsystems.ClawSub;
 import org.usfirst.frc.team1708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1708.robot.subsystems.ElevatorSub;
+import org.usfirst.frc.team1708.robot.subsystems.RampReleaseSub;
 import org.usfirst.frc.team1708.robot.subsystems.RampsSub;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -35,9 +38,10 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static ElevatorSub elevatorSub = new ElevatorSub();
 	public static ClawSub clawSub = new ClawSub();
-	public static RampsSub rampsSub = new RampsSub();
+	public static RampsSub rightRampsSub = new RampsSub(RobotMap.rightRampMotor, RobotMap.rightRampSwitch);
+	public static RampsSub leftRampsSub = new RampsSub(RobotMap.leftRampMotor, RobotMap.leftRampSwitch);
 	public static CameraSub cameraSub = new CameraSub();
-	public static boolean isEndGame = false;
+	public static RampReleaseSub rampReleaseSub = new RampReleaseSub();
 
 	public static OI oi;
 
@@ -111,7 +115,6 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		Scheduler.getInstance().add(new ZeroElevator());
 
 	}
 
@@ -121,6 +124,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+if(DriverStation.getInstance().getMatchTime() <= 30){
+    		Scheduler.getInstance().add(new EnableRampRelease());
+    	}
 	}
 
 	/**
@@ -144,7 +150,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(clawSub);
 		SmartDashboard.putData(elevatorSub);
-		SmartDashboard.putData(rampsSub);
+		SmartDashboard.putData(rightRampsSub);
+		SmartDashboard.putData(leftRampsSub);
 		SmartDashboard.putData(cameraSub);
 	}
 

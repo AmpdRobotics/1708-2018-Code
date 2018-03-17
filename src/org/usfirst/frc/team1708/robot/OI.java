@@ -11,6 +11,9 @@ import org.usfirst.frc.team1708.robot.commands.GoToSwitchLevel;
 import org.usfirst.frc.team1708.robot.commands.IntakeAndClose;
 import org.usfirst.frc.team1708.robot.commands.IntakeCube;
 import org.usfirst.frc.team1708.robot.commands.ManualIntake;
+import org.usfirst.frc.team1708.robot.commands.OpenCloseClaw;
+import org.usfirst.frc.team1708.robot.commands.RaiseRamp;
+import org.usfirst.frc.team1708.robot.commands.RampRelease;
 import org.usfirst.frc.team1708.robot.commands.ShiftHighGear;
 import org.usfirst.frc.team1708.robot.commands.ShiftLowGear;
 import org.usfirst.frc.team1708.robot.commands.ZeroElevator;
@@ -51,7 +54,9 @@ public class OI {
 	public OI() {
 		Button shiftHigh = new JoystickButton(joystickDrive, CONTROLLER_B_BUTTON);
 		Button shiftLow = new JoystickButton(joystickDrive, CONTROLLER_Y_BUTTON);
-		
+		Button dropRamp = new JoystickButton(joystickDrive, CONTROLLER_START_BUTTON);
+		Button raiseRight = new JoystickButton(joystickDrive, CONTROLLER_RIGHT_BUMPER);
+		Button raiseLeft = new JoystickButton(joystickDrive, CONTROLLER_LEFT_BUMPER);
 
 		Button centerOnBlob = new JoystickButton(joystickDrive, 2);
 
@@ -66,6 +71,9 @@ public class OI {
 		Button cubeOuttake = new JoystickButton(mechanisms, 8);
 		Button openClaw = new JoystickButton(mechanisms, 9);
 		Button closeClaw = new JoystickButton(mechanisms, 10);
+
+		// just to test command
+		Button openThenCloseClaw = new JoystickButton(joystickDrive, CONTROLLER_A_BUTTON);
 
 		//// TRIGGERING COMMANDS WITH BUTTONS
 		// Once you have a button, it's trivial to bind it to a button in one of
@@ -89,17 +97,22 @@ public class OI {
 		highScaleHeight.whenPressed(new GoToScaleHighLevel());
 		lowScaleHeight.whenPressed(new GoToScaleLowLevel());
 		mediumScaleHeight.whenPressed(new GoToScaleMediumLevel());
-		//groundLevelHeight.whenPressed(new GoToGroundLevel());
+		// groundLevelHeight.whenPressed(new GoToGroundLevel());
 		zeroElevator.whenPressed(new ZeroElevator());
 
 		shiftHigh.whenPressed(new ShiftHighGear());
 		shiftLow.whenPressed(new ShiftLowGear());
+		dropRamp.whenPressed(new RampRelease());
+		raiseRight.whenPressed(new RaiseRamp(Robot.rightRampsSub));
+		raiseLeft.whenPressed(new RaiseRamp(Robot.leftRampsSub));
 		centerOnBlob.whileHeld(new CenterOnBlob());
 		cubeOuttake.whileHeld(new CubeOuttake());
 		cubeIntake.whenPressed(new IntakeAndClose());
 		openClaw.whenPressed(new DropCube());
 		closeClaw.whenPressed(new CloseClaw());
 		intakeManual.whileHeld(new ManualIntake());
+
+		openThenCloseClaw.whenPressed(new OpenCloseClaw());
 
 	}
 }

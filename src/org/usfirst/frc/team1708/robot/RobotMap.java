@@ -41,11 +41,13 @@ public class RobotMap {
 	public static final int rightDriveEncoderChannelA = 8;
 	public static final int leftDriveEncoderChannelB = 7;
 	public static final int leftDriveEncoderChannelA = 6;
-
+	public static final int leftRampLimitSwitch = 4;
+	public static final int rightRampLimitSwitch = 5;
 	// Solenoids
-	public static final int rampSolenoidPort = 0;
+	public static final int rampSolenoidPort = 7;
 	public static final int driveShifterSolenoid = 4;
 	public static final int clawSolenoid = 3;
+	
 
 	// PWM
 	public static SpeedController driveFrontLeftMotor = new Spark(0);
@@ -53,6 +55,9 @@ public class RobotMap {
 
 	public static SpeedController intakeMotor = new VictorSP(2);
 	public static SpeedController intakeMotorB = new VictorSP(3);
+	
+	public static SpeedController leftRampMotor = new Spark(4);
+	public static SpeedController rightRampMotor = new Spark(5);
 
 	public static Solenoid driveShifter = new Solenoid(driveShifterSolenoid);
 	public static Solenoid clawIntakeSolenoid = new Solenoid(clawSolenoid);
@@ -65,6 +70,8 @@ public class RobotMap {
 	public static ReverseDigitalInput elevatorUpperLimitSwitch = new ReverseDigitalInput(upperElevatorLimitSwitch);
 	public static ReverseDigitalInput elevatorUpperCarriageLimitSwitch = new ReverseDigitalInput(
 			upperElevatorCarriageLimitSwitch);
+	public static ReverseDigitalInput leftRampSwitch = new ReverseDigitalInput(leftRampLimitSwitch);
+	public static ReverseDigitalInput rightRampSwitch = new ReverseDigitalInput(rightRampLimitSwitch);
 
 	public static ReverseDigitalInput cubeSensor = new ReverseDigitalInput(cubeSensorPort);
 
